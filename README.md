@@ -1,5 +1,13 @@
 # securityedu - Senior Design Project
 
+## Team Members
+
+- Jacob Gardner (Cybersecurity) gardnjr@mail.uc.edu
+- Rui Zhou (Cybersecurity) zhourh@mail.uc.edu
+- Tan Nguyen (Cybersecurity) nguye5tn@mail.uc.edu
+- Minh Quan Do (CS) doqn@mail.uc.edu
+- Minh Nhat Le (CS) len2@mail.uc.edu
+
 ## Problem Summary
 
 Most people nowadays have multiple mobile devices and personal computers, which store a lot of personal information and some private data. But many people don't realize that this information is not so secure in the device, in other words, people may just need to do some learning to avoid most security information problems. What we want to do is to let people use our content, avoid some self-inflicted data leakage problems, and improve the security of personal computers.
