@@ -5,13 +5,13 @@ import utilStyles from '../styles/utils.module.css';
 
 export const siteTitle = 'SecurityEdu';
 
-export default function Layout({
+const Layout = ({
   children,
   home,
 }: {
   children: React.ReactNode;
   home?: boolean;
-}) {
+}) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -24,11 +24,11 @@ export default function Layout({
           </>
         ) : (
           <>
-            <h2 className={utilStyles.headingLg}>
+            <h1 className={utilStyles.heading2Xl}>
               <Link href="/">
                 <a className={utilStyles.colorInherit}>{siteTitle}</a>
               </Link>
-            </h2>
+            </h1>
           </>
         )}
       </header>
@@ -42,4 +42,6 @@ export default function Layout({
       )}
     </div>
   );
-}
+};
+
+export default Layout;
