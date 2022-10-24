@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import Layout, { siteTitle } from '../components/layout';
 import styles from '../styles/Home.module.css';
 import utilStyles from '../styles/utils.module.css';
@@ -21,17 +22,17 @@ const Home: NextPage = () => {
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Categories</h2>
         <div className={styles.grid}>
-          <a href="/pcs-laptops" className={styles.card}>
+          <Link href="/pcs-laptops" className={styles.card}>
             <h2>PCs/Laptops</h2>
-          </a>
+          </Link>
 
-          <a href="/mobiles" className={styles.card}>
+          <Link href="/mobiles" className={styles.card}>
             <h2>Mobile Devices</h2>
-          </a>
+          </Link>
 
-          <a href="/enterprises" className={styles.card}>
+          <Link href="/enterprises" className={styles.card}>
             <h2>Enterprises</h2>
-          </a>
+          </Link>
         </div>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
