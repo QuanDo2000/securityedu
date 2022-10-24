@@ -1,21 +1,34 @@
-# securityedu - Senior Design Project
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Team Members
+## Getting Started
 
-- Jacob Gardner (Cybersecurity) gardnjr@mail.uc.edu
-- Rui Zhou (Cybersecurity) zhourh@mail.uc.edu
-- Tan Nguyen (Cybersecurity) nguye5tn@mail.uc.edu
-- Minh Quan Do (CS) doqn@mail.uc.edu
-- Minh Nhat Le (CS) len2@mail.uc.edu
+First, run the development server:
 
-## Problem Summary
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-Most people nowadays have multiple mobile devices and personal computers, which store a lot of personal information and some private data. But many people don't realize that this information is not so secure in the device, in other words, people may just need to do some learning to avoid most security information problems. What we want to do is to let people use our content, avoid some self-inflicted data leakage problems, and improve the security of personal computers.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Problem Statement
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-Many people leak their information because of a lack of understanding of security knowledge. For mobile phones, many people have given sufficient permissions to the app after downloading, and there is a possibility of data leakage. Some bad developers will obtain user information, conduct data analysis and even sell. For PC, many people do not know how to carry out a basic security configuration, or for some people, the need is to strengthen the defense of their personal computer.
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-## Solution
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-Reduce the possibility of information leakage and security issues by introducing information and specific steps to show users how to properly configure the settings using the controllable settings in the mobile device. The same is true for PCs, but in addition, add defense mechanisms and methods on how to strengthen PCs and small businesses.
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
