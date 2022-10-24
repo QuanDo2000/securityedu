@@ -22,16 +22,22 @@ const Home: NextPage = () => {
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Categories</h2>
         <div className={styles.grid}>
-          <Link href="/pcs-laptops" className={styles.card}>
-            <h2>PCs/Laptops</h2>
+          <Link href="/pcs-laptops">
+            <a className={styles.card}>
+              <h2>PCs/Laptops</h2>
+            </a>
           </Link>
 
           <Link href="/mobiles" className={styles.card}>
-            <h2>Mobile Devices</h2>
+            <a className={styles.card}>
+              <h2>Mobile Devices</h2>
+            </a>
           </Link>
 
           <Link href="/enterprises" className={styles.card}>
-            <h2>Enterprises</h2>
+            <a className={styles.card}>
+              <h2>Enterprises</h2>
+            </a>
           </Link>
         </div>
       </section>

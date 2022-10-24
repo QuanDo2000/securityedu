@@ -29,12 +29,6 @@
   font-size: 1.5rem;
 }
 
-.card p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
-}
-
 @media (max-width: 600px) {
   .grid {
     width: 100%;
