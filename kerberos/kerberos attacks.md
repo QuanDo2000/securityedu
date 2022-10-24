@@ -7,7 +7,9 @@ This article will talk about Kerberos attacks in Active Directory. In order to u
 [Mimikatz](https://github.com/gentilkiwi/mimikatz) for Windows attacks
 
 ### 1. Kerberos brute-force
-Kerberos is an authentication protocol, so it is possible to brute-force it. Moreover, Kerberos indicates, even if the password is wrong, whether the username is correct or not. This is advantageous for us to enumerate usernames in the domain. Requirement for this attacks 
+Kerberos is an authentication protocol, so it is possible to brute-force it. Moreover, Kerberos indicates, even if the password is wrong, whether the username is correct or not. This is advantageous for us to enumerate usernames in the domain. Requirement for this attacks are:
+- Connection to the KDC
+- Kerberos pre-authentication errors are not logged in Active Directory with a normal Logon failure event (4625), but rather with specific logs to Kerberos pre-authentication failure (4771).
 
 ### 2. Kerberoasting
 Kerberos uses TGSs tickets to authenticate users to different services. These tickets are encrypted using users' password. Because of that, we would be able to request these tickets and crack users' credentials offline.
