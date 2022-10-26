@@ -1,9 +1,14 @@
-const { PHASE_PRODUCTION_SERVER } = require('next/dist/shared/lib/constants');
+const {
+  PHASE_PRODUCTION_SERVER,
+  PHASE_PRODUCTION_BUILD,
+} = require('next/dist/shared/lib/constants');
 
 module.exports = (phase, { defaultConfig }) => {
   /** @type {import('next').NextConfig} */
-  if (phase == PHASE_PRODUCTION_SERVER) {
+  if (phase == PHASE_PRODUCTION_SERVER || phase == PHASE_PRODUCTION_BUILD) {
     return {
+      reactStrictMode: true,
+      swcMinify: true,
       basePath: '/securityedu',
     };
   }
