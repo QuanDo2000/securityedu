@@ -28,6 +28,11 @@
 ]
 ```
 
+### `/recent`
+
+- This API retrieve lists of posts sorted by date with the most recent at the top.
+- The output is the same as `/category` above.
+
 ### `/posts/{id}`
 
 - This is API to retrive specific post using its ID.
@@ -35,12 +40,10 @@
 - Expected output format:
 
 ```JSON
-[
-  {
-    "id": 1,
-    "date": "2000-01-01",
-    "title": "Something",
-    "content": "Post Content Here",
-  },
-]
+{
+  "id": 1,
+  "date": "2000-01-01",
+  "title": "Something",
+  "content": "Post Content Here",
+}
 ```
