@@ -1,11 +1,22 @@
-import type { NextPage } from 'next';
+import type { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import Date from '../components/date';
 import Layout, { siteTitle } from '../components/layout';
+import { getSortedPostsData, PostsData } from '../lib/posts';
 import styles from '../styles/Home.module.css';
 import utilStyles from '../styles/utils.module.css';
 
-const Home: NextPage = () => {
+export const getStaticProps: GetStaticProps = async () => {
+  const sortedPostsData = getSortedPostsData();
+  return {
+    props: {
+      sortedPostsData,
+    },
+  };
+};
+
+const Home = ({ sortedPostsData }: { sortedPostsData: PostsData }) => {
   return (
     <Layout home>
       <Head>
@@ -22,19 +33,19 @@ const Home: NextPage = () => {
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Categories</h2>
         <div className={styles.grid}>
-          <Link href="/pcs-laptops">
+          <Link href="/category/1">
             <a className={styles.card}>
               <h2>PCs/Laptops</h2>
             </a>
           </Link>
 
-          <Link href="/mobiles" className={styles.card}>
+          <Link href="/category/2">
             <a className={styles.card}>
               <h2>Mobile Devices</h2>
             </a>
           </Link>
 
-          <Link href="/enterprises" className={styles.card}>
+          <Link href="/category/3">
             <a className={styles.card}>
               <h2>Enterprises</h2>
             </a>
@@ -44,8 +55,8 @@ const Home: NextPage = () => {
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Recent Posts</h2>
         {/*     List 5 most recent updated posts here     */}
-        {/* <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
+        <ul className={utilStyles.list}>
+          {sortedPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
               <Link href={`/posts/${id}`}>
                 <a>{title}</a>
@@ -55,7 +66,8 @@ const Home: NextPage = () => {
                 <Date dateString={date} />
               </small>
             </li>
-          ))} */}
+          ))}
+        </ul>
       </section>
     </Layout>
   );
