@@ -9,7 +9,7 @@ import utilStyles from '../../styles/utils.module.css';
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (params && params.type) {
-    const postsData = getPostsData(params.type as string);
+    const postsData = await getPostsData(params.type as string);
     return {
       props: {
         postsData,
