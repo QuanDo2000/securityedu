@@ -1,4 +1,7 @@
-type PostData = {
+import { remark } from 'remark';
+import html from 'remark-html';
+
+export type PostData = {
   id: number;
   date: string;
   title: string;
@@ -13,6 +16,7 @@ type ApiData = {
   created_at: string;
   url: string;
   category: number[];
+  content?: string;
 };
 
 export const getSortedPostsData = async () => {
@@ -73,6 +77,35 @@ export const getPostsData = async (type: string) => {
   return [];
 };
 
+export const getPostData = async (id: string) => {
+  const nid = Number(id);
+  try {
+    const res = await fetch('http://127.0.0.1:8000/api/getArticle?id=' + nid);
+    const data: ApiData = await res.json();
+
+    if (data.content) {
+      const content = await remark().use(html).process(data.content);
+      const contentHtml = content.toString();
+      return {
+        id: data.id,
+        title: data.title,
+        date: data.created_at,
+        content: contentHtml,
+      };
+    } else {
+      return {
+        id: data.id,
+        title: data.title,
+        date: data.created_at,
+        content: data.content,
+      };
+    }
+  } catch (err) {
+    console.log(err);
+  }
+  return {};
+};
+
 export const getAllCategoryIds = () => {
   const types = [1, 2, 3];
   return types.map((type) => {
@@ -82,4 +115,22 @@ export const getAllCategoryIds = () => {
       },
     };
   });
+};
+
+export const getAllPostsIds = async () => {
+  try {
+    const res = await fetch('http://127.0.0.1:8000/api/list');
+    const data = await res.json();
+
+    return data.map((entry: ApiData) => {
+      return {
+        params: {
+          id: entry.id.toString(),
+        },
+      };
+    });
+  } catch (err) {
+    console.log(err);
+  }
+  return [];
 };
