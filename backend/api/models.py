@@ -10,5 +10,4 @@ class Article(models.Model):
     title = models.CharField(max_length=200)
     created_at = models.DateField(auto_now=False, auto_now_add=False)
     category = models.ManyToManyField(Category)
-    url = models.URLField(max_length=200)
     content = models.TextField(null=True)
