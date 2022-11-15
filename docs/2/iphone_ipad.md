@@ -60,3 +60,9 @@ When logging in to third-party software with apple id, the specific steps:
 3. Use Face ID for authentication.
 
 And users can turn off forwarding emails: just turn off "Forward to". Or change your email address.
+
+# References
+
+Harden your iPhone from a cyberattack with lockdown mode. Apple Support. (n.d.). Retrieved October 30, 2022, from <https://support.apple.com/en-sg/guide/iphone/iph049680987/16.0/ios/16.0>
+
+Use the built-in security and privacy protections of iPhone. Apple Support. (n.d.). Retrieved October 30, 2022, from <https://support.apple.com/en-sg/guide/iphone/iph6e7d349d1/ios>
