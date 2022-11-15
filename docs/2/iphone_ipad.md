@@ -61,7 +61,7 @@ When logging in to third-party software with apple id, the specific steps:
 
 And users can turn off forwarding emails: just turn off "Forward to". Or change your email address.
 
-# References
+## References
 
 Harden your iPhone from a cyberattack with lockdown mode. Apple Support. (n.d.). Retrieved October 30, 2022, from <https://support.apple.com/en-sg/guide/iphone/iph049680987/16.0/ios/16.0>
 
