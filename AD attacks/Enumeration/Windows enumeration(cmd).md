@@ -1,62 +1,63 @@
+This introduces some commands in cmd we can use when get into a Windows machine.
 
 ### List users
-```bash
+```cmd
 net users
 ```
 ### Current user’s privileges
-```bash
+```cmd
 whoami /priv
 ```
 ### List details of a user
-```bash
+```cmd
 net user username (e.g. `net user Administrator`
 ```
 ### Other users logged in simultaneously
-```bash
+```cmd
 qwinsta 
 ```
 ### User groups defined on the system
-```bash
+```cmd
 net localgroup
 ```
 ### List members of a specific group
-```bash
+```cmd
 net localgroup groupname (e.g. net localgroup Administrators)
 ```
 ### Collecting system information
-```bash
+```cmd
 systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
 ```
 ### Searching files
-```bash
+```cmd
 findstr /si password *.txt
 ```
 ### Patch level
-```bash
+```cmd
 wmic qfe get Caption,Description,HotFixID,InstalledOn
 ```
 ### Network Connections
-```bash
+```cmd
 netstat -ano
 ```
 ### Scheduled Tasks
-```bash
+```cmd
 schtasks /query /fo LIST /v
 ```
 ### drivers
-```bash
+```cmd
 driverquery
 ```
 ### Check anti-virus
-```bash
+```cmd
 sc query windefend -> check specific windefend service
 sc queryex type=service -> check all services
 ```
 ### Check services
-```bash
+```cmd
 wmic service list brief
 ```
 ### View details of specific service
-```bash
+```cmd
 sc qc RemoteMouseService
 ```
