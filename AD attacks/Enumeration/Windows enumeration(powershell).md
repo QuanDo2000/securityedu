@@ -1,4 +1,4 @@
-
+This introduces some commands in powershell we can use when get into a Windows machine.
 ### List users
 ```powershell
 Get-LocalUser
