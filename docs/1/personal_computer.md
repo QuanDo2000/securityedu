@@ -1,4 +1,4 @@
-# Personal Computer
+#
 
 Almost everyone today has a personal computer that they have access to, but most don’t know how to take the steps to properly secure their PC. Keeping your computer secure will help avoid hacking attempts, malware, and loss of personal information.
 
