@@ -3,8 +3,13 @@ from django.db import models
 # Create your models here.
 
 
+
+class SubCategory(models.Model): 
+    name = models.CharField(max_length=200)
+
 class Category(models.Model):
     name = models.CharField(max_length=200)
+    sub_category = models.ManyToManyField(SubCategory, blank=True)
 
 class Article(models.Model):
     title = models.CharField(max_length=200)
