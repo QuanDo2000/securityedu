@@ -15,6 +15,18 @@ a {
   box-sizing: border-box;
 }
 
+img {
+  max-width: 100%;
+}
+
+pre {
+  padding: 0.5rem;
+  max-width: 100%;
+  overflow-x: auto;
+  tab-size: 4;
+  border: 1px solid white;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
