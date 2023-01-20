@@ -19,3 +19,40 @@ Many people leak their information because of a lack of understanding of securit
 ## Solution
 
 Reduce the possibility of information leakage and security issues by introducing information and specific steps to show users how to properly configure the settings using the controllable settings in the mobile device. The same is true for PCs, but in addition, add defense mechanisms and methods on how to strengthen PCs and small businesses.
+
+## Design Documents
+
+Within the folder `design_docs` are the documents created/used during the process of designing the project solution.
+
+## Website
+
+Below are the instructions for the website.
+
+### Start Front-end Service
+
+```bash
+cd frontend
+npm i
+npm run dev
+```
+
+The front-end server is hosted on localhost:3000. This starts the development server.
+
+### Start Back-end Service
+
+```bash
+cd backend
+pip install -r requirements.txt
+python manage.py runserver
+```
+
+The back-end server is hosted on localhost:8000.
+
+### Documents
+
+All documents posted on the page are located in `docs` folder. Documents must be in Markdown format, the preferred flavor of Markdown is Github.
+The category are as follows
+
+1. PC/Laptops
+2. Mobile Devices
+3. Enterprises (AD)
