@@ -9,7 +9,6 @@ module.exports = (phase, { defaultConfig }) => {
     return {
       reactStrictMode: true,
       swcMinify: true,
-      basePath: '/securityedu',
     };
   }
 

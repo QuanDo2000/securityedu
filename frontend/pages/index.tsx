@@ -56,7 +56,7 @@ const Home = ({ sortedPostsData }: { sortedPostsData: PostsData }) => {
         <h2 className={utilStyles.headingLg}>Recent Posts</h2>
         {/*     List 5 most recent updated posts here     */}
         <ul className={utilStyles.list}>
-          {sortedPostsData.map(({ id, date, title }) => (
+          {sortedPostsData.slice(0, 5).map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
               <Link href={`/posts/${id}`}>
                 <a>{title}</a>
@@ -68,6 +68,16 @@ const Home = ({ sortedPostsData }: { sortedPostsData: PostsData }) => {
             </li>
           ))}
         </ul>
+      </section>
+      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+        <h2 className={utilStyles.headingLg}>Security Updates</h2>
+        <div className={styles.grid}>
+          <Link href="/msupdate">
+            <a className={styles.card}>
+              <h2>Microsoft</h2>
+            </a>
+          </Link>
+        </div>
       </section>
     </Layout>
   );

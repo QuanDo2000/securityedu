@@ -10,12 +10,17 @@
     "export": "next export"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.11.7",
+    "@mui/x-data-grid": "^5.17.22",
     "date-fns": "^2.29.3",
     "next": "12.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "remark": "^14.0.2",
-    "remark-html": "^15.0.1"
+    "remark-html": "^15.0.1",
+    "swr": "^2.0.3"
   },
   "devDependencies": {
     "@types/node": "18.11.3",
