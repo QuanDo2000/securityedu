@@ -15,7 +15,7 @@
 - Use the dot to still stay in current directory and bypass filter /etc/passwd keyword
 Example: /etc/passwd/.
 - If the directory is forced -> include it in the payload too
-Example: if the web application asks to supply input that has to include a directory such as: http://webapp.thm/index.php?lang=languages/EN.php then, to exploit this, we need to include the directory in the payload like so: ?lang=languages/../../../../../etc/passwd.
+Example: if the web application asks to supply input that has to include a directory such as: http://webapp.uc.edu/index.php?lang=languages/EN.php then, to exploit this, we need to include the directory in the payload like so: ?lang=languages/../../../../../etc/passwd.
 
 ### RFI (PHP)
 - Condition: allow_furl_open set to on 
