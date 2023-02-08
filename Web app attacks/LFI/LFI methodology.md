@@ -1,11 +1,11 @@
 ### Steps for testing for LFI
 
-- Find an entry point that could be via GET, POST, COOKIE, or HTTP header values!
+- Find an entry point that could be via GET, POST, COOKIE, or HTTP header values.
 - Enter a valid input to see how the web server behaves.
 - Enter invalid inputs, including special characters and common file names.
 - Don't always trust what you supply in input forms is what you intended! Use either a browser address bar or a tool such as Burpsuite.
-- Look for errors while entering invalid input to disclose the current path of the web application; if there are no errors, then trial and error might be your best option.
-- Understand the input validation and if there are any filters!
+- Look for errors while entering invalid input to disclose the current path of the web application; if there are no errors, then trial and error might be the best option.
+- Understand the input validation and if there are any filters.
 - Try the inject a valid entry to read sensitive files
 
 #### Bypass Technique
