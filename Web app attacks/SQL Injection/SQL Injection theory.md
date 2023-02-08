@@ -1,6 +1,12 @@
-### SQL basics
+### What is a database?
+According to Oracle, a database is an organized collection of structured information, or data, typically stored electronically in a computer system. A database is usually controlled by a database management system (DBMS). Together, the data and the DBMS, along with the applications that are associated with them, are referred to as a database system, often shortened to just database.
 
-SQL (Structured Query Language) Injection, mostly referred to as SQLi, is an attack on a web application database server that causes malicious queries to be executed. When a web application communicates with a database using input from a user that hasn't been properly validated, there runs the potential of an attacker being able to steal, delete or alter private and customer data and also attack the web applications authentication methods to private or customer areas. This is why as well as SQLi being one of the oldest web application vulnerabilities, it also can be the most damaging.
+### What is Structured Query Language (SQL)?
+Structured Query Language is a programming language used to manage relational database
+
+### SQL Injection
+
+A web application database server is attacked via SQL Injection, also known as SQLi, which results in the execution of malicious queries. An attacker may be able to steal, remove, or alter private and customer data as well as attack the web application's authentication procedures to private or customer regions when a web application interfaces with a database utilizing user input that hasn't been properly vetted. Because of this, SQLi is not just one of the most dangerous online application vulnerabilities, but also one of the oldest.
 
 #### Limit 1 will only return one row of data. LIMIT 1,1 will force the query to skip the first result
 
@@ -91,3 +97,8 @@ Because 1=1 is a true statement and we've used an OR operator, this will always 
 
 
 #### Boolean-based
+
+References:
+- 
+
+
