@@ -1,35 +1,47 @@
-### What is a database?
+### 1. What is a database?
 According to Oracle, a database is an organized collection of structured information, or data, typically stored electronically in a computer system. A database is usually controlled by a database management system (DBMS). Together, the data and the DBMS, along with the applications that are associated with them, are referred to as a database system, often shortened to just database.
 
-### What is Structured Query Language (SQL)?
-Structured Query Language is a programming language used to manage relational database
+### 2. What is Structured Query Language (SQL)?
+Structured Query Language is a programming language used to manage relational database. Some basic SQL syntaxes are:
+#### Select
+The SELECT statement is used to select data from a database. For example:
 
-### SQL Injection
-
-A web application database server is attacked via SQL Injection, also known as SQLi, which results in the execution of malicious queries. An attacker may be able to steal, remove, or alter private and customer data as well as attack the web application's authentication procedures to private or customer regions when a web application interfaces with a database utilizing user input that hasn't been properly vetted. Because of this, SQLi is not just one of the most dangerous online application vulnerabilities, but also one of the oldest.
-
-#### Limit 1 will only return one row of data. LIMIT 1,1 will force the query to skip the first result
-
-#### The semicolon in the URL signifies the end of the SQL statement, and the two dashes cause everything afterwards to be treated as a comment. By doing this, you're just, in fact, running the query:
+```SQL
+select * from users;
+```
+This will retrieve everything from the users table.
+```SQL
+select username,password from users;
+```
+This will retrieve data from the username,password column from the users table.
 
 #### UNION
 
 The UNION statement combines the results of two or more SELECT statements to retrieve data from either single or multiple tables; the rules to this query are that 
 - The UNION statement must retrieve the same number of columns in each SELECT statement. 
 - The columns have to be of a similar data type and the column order has to be the same. 
-Example
-![[Pasted image 20230131182231.png]]
+Example query:
+```SQL
+SELECT name,address,city,postcode from customers UNION SELECT company,address,city,postcode from suppliers;
+```
 
 #### Insert
 
-The INSERT statement tells the database we wish to insert a new row of data into the table. "into users" tells the database which table we wish to insert the data into, "(username,password)" provides the columns we are providing data for and then "values ('bob','password');" provides the data for the previously specified columns.
+The INSERT statement tells the database we wish to insert a new row of data into the table. "into users" tells the database which table we wish to insert the data into, "(username,password)" provides the columns we are providing data for and then "values ('test','password');" provides the data for the previously specified columns.
+
+```SQL
+insert into users (username,password) values ('test','password123');
+```
+
+#### Limit 1 will only return one row of data. LIMIT 1,1 will force the query to skip the first result
+#### The semicolon in the URL signifies the end of the SQL statement, and the two dashes in SQL treats everything afterwards a comment. 
+
+### SQL Injection
+
+SQL injection can be used to attack a web application database server to make malicious queries are executed. When a web application interfaces with a database using user input that hasn't been sanitized correctly, an attacker may be able to steal, destroy, or manipulate private and customer data as well as assault the web application's authentication methods to private or customer areas. Due to this, SQLi is one of the oldest and dangerous web application attacks.
 
 
-insert into users (username,password) values ('bob','password123');
-![[Pasted image 20230131182528.png]]
-
-
-### Type of SQL Injection
+### 3. Type of SQL Injection
 
 #### In-Band SQL Injection
 
@@ -50,9 +62,9 @@ Steps
 - Detect how many columns using incremented Union query
 - Find the number of columns then find the columns where the data is displayed. Show the database name
 - Look for table names in the database with group_concat(). Example query:
-0 UNION SELECT 1,2,group_concat(table_name) FROM information_schema.tables WHERE table_schema = 'sqli_one'
+0 UNION SELECT 1,2,group_concat(table_name) FROM information_schema.tables WHERE table_schema = 'sqli_uc'
 - Look for column names in tables. Example query:
-0 UNION SELECT 1,2,group_concat(column_name) FROM information_schema.columns WHERE table_name = 'staff_users'
+0 UNION SELECT 1,2,group_concat(column_name) FROM information_schema.columns WHERE table_name = 'ucstaff_users'
 
 - Look for data we want, typically username and password
 0 UNION SELECT 1,2,group_concat(username,':',password SEPARATOR '<br>') FROM staff_users
@@ -60,45 +72,14 @@ Steps
 #### Blind SQL injection
 ##### Authentication Bypass
 
-One of the most straightforward Blind SQL Injection techniques is when bypassing authentication methods such as login forms. In this instance, we aren't that interested in retrieving data from the database; We just want to get past the login. 
+When avoiding authentication procedures like login forms, one of the simplest Blind SQL Injection techniques is used. In this case, getting data out of the database is not what we want; we just want to get past the login.
 
-
-Login forms that are connected to a database of users are often developed in such a way that the web application isn't interested in the content of the username and password but more whether the two make a matching pair in the users table. In basic terms, the web application is asking the database "do you have a user with the username bob and the password bob123?", and the database replies with either yes or no (true/false) and, depending on that answer, dictates whether the web application lets you proceed or not. 
-
-
-Taking the above information into account, it's unnecessary to enumerate a valid username/password pair. We just need to create a database query that replies with a yes/true.
-
-
-Practical:
-
-Level Two of the SQL Injection examples shows this exact example. We can see in the box labelled "SQL Query" that the query to the database is the following:
-
-
-select * from users where username='%username%' and password='%password%' LIMIT 1;
-
-
-N.B The %username% and %password% values are taken from the login form fields, the initial values in the SQL Query box will be blank as these fields are currently empty.
-
-
-To make this into a query that always returns as true, we can enter the following into the password field:
-
-
-' OR 1=1;--
-
-
-Which turns the SQL query into the following:
-
-
-select * from users where username='' and password='' OR 1=1;
-
-
-Because 1=1 is a true statement and we've used an OR operator, this will always cause the query to return as true, which satisfies the web applications logic that the database found a valid username/password combination and that access should be allowed.
-
+When creating login forms for online applications that connect to user databases, it's common practice to focus less on the text of the username and password and more on whether they match up in the users table. For example, the web application asks the database, "Do you have a user with the username tan and the password tan123?" The database responds with either yes or no (true/false), and depending on that response, decides whether the web program will be allowed to continue. Because of that, we do not need to care about enumerating username or password.
 
 
 #### Boolean-based
 
 References:
-- 
+- https://www.oracle.com/database/what-is-database/
 
 
