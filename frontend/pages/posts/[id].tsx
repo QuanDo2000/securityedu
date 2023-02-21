@@ -1,11 +1,11 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Layout from '../../components/layout';
 import utilStyles from '../../styles/utils.module.css';
-import { getAllPostsIds, getPostData, PostData } from '../../lib/posts';
+import { getPostData, PostData } from '../../lib/posts';
 import Date from '../../components/date';
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   if (params && params.id) {
     const postData = await getPostData(params.id as string);
     return {
@@ -17,14 +17,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: { error: true },
-  };
-};
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getAllPostsIds();
-  return {
-    paths,
-    fallback: false,
   };
 };
 

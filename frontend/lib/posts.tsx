@@ -105,32 +105,3 @@ export const getPostData = async (id: string) => {
   }
   return {};
 };
-
-export const getAllCategoryIds = () => {
-  const types = [1, 2, 3];
-  return types.map((type) => {
-    return {
-      params: {
-        type: type.toString(),
-      },
-    };
-  });
-};
-
-export const getAllPostsIds = async () => {
-  try {
-    const res = await fetch('http://127.0.0.1:8000/api/list');
-    const data = await res.json();
-
-    return data.map((entry: ApiData) => {
-      return {
-        params: {
-          id: entry.id.toString(),
-        },
-      };
-    });
-  } catch (err) {
-    console.log(err);
-  }
-  return [];
-};

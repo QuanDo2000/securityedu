@@ -1,13 +1,13 @@
-import type { GetStaticPaths, GetStaticProps } from 'next';
+import type { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Date from '../../components/date';
 import Layout from '../../components/layout';
-import { getAllCategoryIds, getPostsData, PostsData } from '../../lib/posts';
+import { getPostsData, PostsData } from '../../lib/posts';
 import utilStyles from '../../styles/utils.module.css';
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   if (params && params.type) {
     const postsData = await getPostsData(params.type as string);
     return {
@@ -19,14 +19,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: { error: true },
-  };
-};
-
-export const getStaticPaths: GetStaticPaths = () => {
-  const paths = getAllCategoryIds();
-  return {
-    paths,
-    fallback: false,
   };
 };
 

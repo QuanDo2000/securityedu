@@ -7,7 +7,7 @@ import { getSortedPostsData, PostsData } from '../lib/posts';
 import styles from '../styles/Home.module.css';
 import utilStyles from '../styles/utils.module.css';
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps = async () => {
   const sortedPostsData = await getSortedPostsData();
   return {
     props: {

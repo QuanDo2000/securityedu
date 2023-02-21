@@ -48,6 +48,12 @@ python manage.py runserver
 
 The back-end server is hosted on localhost:8000.
 
+### Hosting
+
+1. Start the back-end server
+2. Build the front-end page by running `npm run build`
+3. Start serving the page by running `npm start`
+
 ### Documents
 
 All documents posted on the page are located in `docs` folder. Documents must be in Markdown format, the preferred flavor of Markdown is Github.
