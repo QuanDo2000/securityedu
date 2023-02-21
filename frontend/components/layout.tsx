@@ -8,10 +8,14 @@ export const siteTitle = 'SecurityEdu';
 const Layout = ({
   children,
   home,
+  admin,
 }: {
   children: React.ReactNode;
   home?: boolean;
+  admin?: boolean;
 }) => {
+  const isAuth = true;
+
   return (
     <div className={styles.container}>
       <Head>
@@ -20,26 +24,29 @@ const Layout = ({
       <header className={styles.header}>
         {home ? (
           <>
-            <h1 className={utilStyles.heading2Xl}>{siteTitle}</h1>
+            <h1 className={utilStyles.heading2Xl}>
+              {siteTitle} {admin && 'Admin Page'}
+            </h1>
           </>
         ) : (
           <>
             <h1 className={utilStyles.heading2Xl}>
-              <Link href="/">
-                <a className={utilStyles.colorInherit}>{siteTitle}</a>
+              <Link href={admin ? '/admin' : '/'}>
+                <a className={utilStyles.colorInherit}>
+                  {siteTitle} {admin && 'Admin Page'}
+                </a>
               </Link>
             </h1>
           </>
         )}
       </header>
       <main>{children}</main>
-      {!home && (
-        <div className={styles.backToHome}>
-          <Link href="/">
-            <a>← Back to home</a>
-          </Link>
-        </div>
-      )}
+      <div className={styles.footer}>
+        {!home && <Link href="/">← Back to home</Link>}
+        {home && <div></div>}
+        {/* {home && !isAuth && <Link href="/login">Login</Link>}
+        {home && isAuth && <Link href="/admin">Admin</Link>} */}
+      </div>
     </div>
   );
 };

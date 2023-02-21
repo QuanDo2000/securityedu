@@ -1,7 +1,7 @@
 .container {
   width: 50rem;
   padding: 0 1rem;
-  margin: 3rem auto 6rem;
+  margin: 3rem auto 3rem;
 }
 
 .header {
@@ -10,6 +10,8 @@
   align-items: center;
 }
 
-.backToHome {
-  margin: 3rem 0 0;
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 2rem;
 }
