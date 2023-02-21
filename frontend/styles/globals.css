@@ -27,12 +27,11 @@ pre {
   border: 1px solid white;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: rgb(40, 40, 40);
-  }
+html {
+  color-scheme: dark;
+}
+
+body {
+  color: white;
+  background: rgb(40, 40, 40);
 }
