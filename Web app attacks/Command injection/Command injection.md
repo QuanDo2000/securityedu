@@ -5,7 +5,7 @@ Command injection is the misuse of an application's behavior to execute commands
 - Blind command injection: While testing payloads, there is no direct output from the application using this sort of command injection. 
 - Verbose: With this form of injection, you test a payload and receive immediate result from the application. One simple to test RCE is using the whoami command to will reveal the user that the application is now running as. The username will be output on the page by the web application.
 
-- Detecting Blind Command Injection
+### Detecting Blind Command Injection
 
 Blind command injection occurs when there is no apparent output, making it difficult to detect right away. For instance, if a command is issued, but no message is output by the web application.
 
@@ -17,7 +17,8 @@ A great technique to check for command injection is to use the curl command. Thi
 ```bash
 curl http://uc.edu/test.php%3Fsearch%3DThe%20test%3B%20whoami
 ```
-- Detecting Verbose Command Injection
+
+### Detecting Verbose Command Injection
 
 This is the simplest method for detecting command injection. When the program provides you with feedback or output regarding what is occurring or being run, this is known as verbose command injection.
 
