@@ -288,7 +288,7 @@ const CveDetail = () => {
               id="sort-by"
               value={currFilter.order}
               label="Sort By"
-              onChange={(e: SelectChangeEvent<HTMLInputElement>) => {
+              onChange={(e: SelectChangeEvent<number>) => {
                 setCurrFilter({
                   ...currFilter,
                   order: Number(e.target.value),
@@ -308,7 +308,7 @@ const CveDetail = () => {
               id="cvss-score"
               value={currFilter.cvssScoreMin}
               label="CVSS Score >="
-              onChange={(e: SelectChangeEvent<HTMLInputElement>) => {
+              onChange={(e: SelectChangeEvent<number>) => {
                 setCurrFilter({
                   ...currFilter,
                   cvssScoreMin: Number(e.target.value),
