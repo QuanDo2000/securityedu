@@ -77,6 +77,11 @@ const Home = ({ sortedPostsData }: { sortedPostsData: PostsData }) => {
               <h2>Microsoft</h2>
             </a>
           </Link>
+          <Link href="/cvedetail">
+            <a className={styles.card}>
+              <h2>CVE Detail</h2>
+            </a>
+          </Link>
         </div>
       </section>
     </Layout>
