@@ -29,3 +29,11 @@ For instance, the web application displays the results of commands like ping or 
 - ping:	This command will make the application hangs because if the system pings, it will take time to return the result.
 - sleep: This is another useful payload to make the system hangs as well.
 
+### Remediation
+Input sanitisation: A great technique to avoid command injection is to sanitize any user input that a program utilizes. This procedure establishes the types or formats of data that a user may input. For instance, a field that only allows numbers or that filters out special characters like >, &, and /. Some examples of effective validation include:
+- Validating against a whitelist of permitted values.
+- Validating that the input is a number.
+- Validating that the input contains only alphanumeric characters, no other syntax or whitespace.
+
+### References
+- Command Injection Remediation: https://portswigger.net/web-security/os-command-injection
