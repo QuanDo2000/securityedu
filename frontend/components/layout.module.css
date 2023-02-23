@@ -1,7 +1,7 @@
 .container {
   width: 50rem;
   padding: 0 1rem;
-  margin: 3rem auto 3rem;
+  margin: 2rem auto 3rem;
 }
 
 .header {
@@ -13,5 +13,5 @@
 .footer {
   display: flex;
   justify-content: space-between;
-  padding-top: 2rem;
+  padding-top: 1rem;
 }
