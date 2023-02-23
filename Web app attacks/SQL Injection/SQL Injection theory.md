@@ -79,6 +79,36 @@ When creating login forms for online applications that connect to user databases
 
 #### Boolean-based
 
+### 4. Practical examples (OWASP Juice Shop)
+##### a. Blind SQL injection
+In this example we have a login form that take a username and password to login. 
+![image](https://user-images.githubusercontent.com/112114250/220799219-28da7d10-d1fe-4b27-9219-6f65014b425a.png)
+
+We try login with credentials of test:password to see what happens. It returns an error of Invalid email or password.
+![image](https://user-images.githubusercontent.com/112114250/220799637-f9f7f012-683c-43de-98b8-339ea19c3949.png)
+
+Let's try some basic SQL Injection since we know the website connect with database to authenticate user. 
+
+PAYLOAD: admin' or 1=1--
+
+Let's break dơn the syntax of this payload 
+
+1. In the SQL query, the letter " will close the brackets.
+
+2. The entire statement is true since 1+1 is always true. As a result, the server will receive a message stating that the email is legitimate, and we will be logged in as user id 0, which is the administrator account.
+
+3. The -- character is used in SQL to comment out data, so anything after that will be treated as a comment.
+
+![image](https://user-images.githubusercontent.com/112114250/220800303-eb15618f-a594-4bda-810b-bb968a047ab5.png)
+
+And we solve the challenge to log in as administrator account using SQL injection.
+![image](https://user-images.githubusercontent.com/112114250/220800351-f9390efa-e7f9-43ee-a94e-c0cc886723a1.png)
+
+
+
+
+
+
 References:
 - https://www.oracle.com/database/what-is-database/
 
