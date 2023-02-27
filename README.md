@@ -70,7 +70,7 @@ http://localhost:8000/api/submit <br>
 You have to send data you want to submit along with the POST request in a JSON form <br>
 { <br>
   'title': 'This is my title', <br>
-  'category': 'dogs, cats',  <> (seperate category with a comma and whitespace) <br>
+  'category': 'dogs, cats',  <!---seperate category with a comma and whitespace---> <br>
   'content': 'This is my content' <br>
  }<br>
  
