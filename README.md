@@ -48,7 +48,7 @@ python manage.py runserver
 
 The back-end server is hosted on localhost:8000.
 
-##### API Usage
+#### API Usage
 After running the back-end server, you can access the api by sending request to these urls: <br>
 
 To list all articles, send GET request to: <br> 
