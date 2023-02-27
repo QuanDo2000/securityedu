@@ -48,6 +48,33 @@ python manage.py runserver
 
 The back-end server is hosted on localhost:8000.
 
+##### API Usage
+After running the back-end server, you can access the api by sending request to these urls:
+
+To list all articles, send GET request to: 
+http://localhost:8000/api/list
+
+To get a specific article, send GET request to:
+http://localhost:8000/api/getArticle?id=articleId
+
+articleId being the id of the article you want to get
+
+To get articles in a specific category, send GET request to:
+http://localhost:8000/api/getArticlesByCategory?category=categoryId
+
+categoryId being the id of the categories you want to get
+
+To submit an article to the website, send POST request to: 
+http://localhost:8000/api/submit
+
+You have to send data you want to submit along with the POST request in a JSON form
+{
+  'title': 'This is my title',
+  'category': 'dogs, cats', // seperate category with a comma and whitespace
+  'content': 'This is my content'
+ }
+ 
+
 ### Hosting
 
 1. Start the back-end server
