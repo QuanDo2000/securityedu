@@ -25,10 +25,9 @@ This is the simplest method for detecting command injection. When the program pr
 For instance, the web application displays the results of commands like ping or whoami.
 
 ### 5. Payloads
-- whoami: see what user the application is running under.
-- ls: List the contents of the current directory. Configuration files, environment files (tokens and application keys), and many other important files might be present with this command.
+- whoami: see who is running the application.
 - ping:	This command will make the application hangs because if the system pings, it will take time to return the result.
-- sleep: This is another useful payload to make the system hangs as well.
+- sleep: Making the system hangs will show we have RCE.
 
 ### 6. Practical examples (OWASP Juice Shop)
 The first part to detect command injection vulnerability is to find where we can inject command. OWASP Juice Shop has a backend API to review products with endpoint at /rest/products/{id}/reviews. Try to go to http://localhost:3000/rest/products/1/reviews to see the product review with ID 1.
