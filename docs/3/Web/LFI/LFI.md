@@ -40,13 +40,12 @@ https://uc.edu/loadRoom?filename=..\..\..\windows\win.ini
 
 ### 5. Steps for testing for LFI
 
-- Find an entry point that could be via GET, POST, COOKIE, or HTTP header values.
-- Enter a valid input to see how the web server behaves.
-- Enter invalid inputs, including special characters and common file names.
-- Don't always trust what you supply in input forms is what you intended! Use either a browser address bar or a tool such as Burpsuite.
-- Look for errors while entering invalid input to disclose the current path of the web application; if there are no errors, then trial and error might be the best option.
-- Understand the input validation and if there are any filters.
-- Try the inject a valid entry to read sensitive files
+- Find an entry point in the request could be used for LFI. Try changing request method such as GET, POST.
+- Try a valid input to observe normal behavior.
+- Try valid input combining with special characters
+- Try to use invalid inputs and look for errors to see if the file path included.
+- Try different possible input to guess the input validation on the server-side
+- Use valid inputs to read sensitive files in the server.
 
 #### 6. Bypass Technique
 
@@ -59,14 +58,12 @@ Example: /etc/passwd/.
 Example: if the web application asks to supply input that has to include a directory such as: http://webapp.uc.edu/index.php?lang=languages/EN.php then, to exploit this, we need to include the directory in the payload like so: ?lang=languages/../../../../../etc/passwd.
 
 ### 7. Remediation
-As a developer, it's important to be aware of web application vulnerabilities, how to find them, and prevention methods. To prevent the file inclusion vulnerabilities, some common suggestions include:
-- Keep system and services, including web application frameworks, updated with the latest version.
-- Turn off PHP errors to avoid leaking the path of the application and other potentially revealing information.
-- A Web Application Firewall (WAF) is a good option to help mitigate web application attacks.
-- Disable some PHP features that cause file inclusion vulnerabilities if your web app doesn't need them, such as allow_url_fopen on and allow_url_include.
-- Carefully analyze the web application and allow only protocols and PHP wrappers that are in need.
-- Never trust user input, and make sure to implement proper input validation against file inclusion.
-- Implement whitelisting for file names and locations as well as blacklisting.
+To prevent the file inclusion vulnerabilities, some common suggestions include:
+- Update framework to latest version
+- Implementing web application firewall
+- Disable PHP features that can cause File Inclusion such as allow_url_fopen on and allow_url_include.
+- Always sanitize user input and implement input validation.
+- Implement white list and black list for file locations.
 
 ### References
 
