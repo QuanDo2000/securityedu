@@ -11,6 +11,7 @@ const Submit = () => {
   const [mdContent, setMdContent] = React.useState('');
   const [tags, setTags] = React.useState<string[]>([]);
   const [hasError, setHasError] = React.useState(false);
+  const [message, setMessage] = React.useState('');
 
   React.useEffect(() => {
     const error = tags.filter((value) => {
@@ -26,14 +27,35 @@ const Submit = () => {
     }
   }, [tags]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log({
-      postname: e.currentTarget.postname.value,
-      markdown: e.currentTarget.markdown.value,
-      category: tags,
-    });
+    try {
+      const res = await fetch('http://127.0.0.1:8000/api/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          title: e.currentTarget.postname.value,
+          content: e.currentTarget.markdown.value,
+          category: tags.join(', '),
+        }),
+      });
+      const resJson = await res.json();
+      if (res.status === 200) {
+        setPostName('');
+        setMdContent('');
+        setTags([]);
+        setMessage('Post submitted successfully');
+      } else {
+        setMessage('Some error occured');
+        console.log(resJson);
+      }
+    } catch (err) {
+      setMessage('Some error occured');
+      console.log(err);
+    }
   };
 
   return (
@@ -46,6 +68,11 @@ const Submit = () => {
         }}
       >
         <h2>Post Submission</h2>
+        {message !== '' && (
+          <Alert severity="info" sx={{ mb: '1rem' }}>
+            {message}
+          </Alert>
+        )}
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             required
