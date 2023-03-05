@@ -2,6 +2,10 @@ import Head from 'next/head';
 import Link from 'next/link';
 import styles from './layout.module.css';
 import utilStyles from '../styles/utils.module.css';
+import { authCheck } from '../lib/auth';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
 
 export const siteTitle = 'SecurityEdu';
 
@@ -14,7 +18,35 @@ const Layout = ({
   home?: boolean;
   admin?: boolean;
 }) => {
-  const isAuth = true;
+  const router = useRouter();
+  const [isAuth, setAuth] = useState(false);
+
+  useEffect(() => {
+    authCheck()
+      .then((res) => {
+        setAuth(res);
+      })
+      .catch(() => {
+        setAuth(false);
+      });
+  });
+
+  const handleLogout = async (e: React.MouseEventHandler<HTMLLinkElement>) => {
+    try {
+      const res = await fetch('http://127.0.0.1:8000/auth/logout', {
+        method: 'POST',
+      });
+      const resJson = res.json();
+      if (res.status === 200) {
+        Cookies.remove('jwt');
+        router.push('/');
+      } else {
+        console.log(resJson);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -44,8 +76,13 @@ const Layout = ({
       <div className={styles.footer}>
         {!home && <Link href="/">← Back to home</Link>}
         {home && <div></div>}
-        {/* {home && !isAuth && <Link href="/login">Login</Link>}
-        {home && isAuth && <Link href="/admin">Admin</Link>} */}
+        {isAuth && !admin && <Link href="/admin">Admin</Link>}
+        {isAuth && admin && (
+          <Link legacyBehavior={false} href="#" onClick={handleLogout}>
+            Logout
+          </Link>
+        )}
+        {!isAuth && <Link href="/login">Login</Link>}
       </div>
     </div>
   );
