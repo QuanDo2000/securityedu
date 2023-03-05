@@ -3,8 +3,6 @@ export const authCheck = async () => {
     const res = await fetch('http://localhost:8000/auth/user', {
       method: 'GET',
       credentials: 'include',
-      mode: 'cors',
-      referrer: 'http://localhost:3000',
     });
     if (res.status === 200) return true;
     return false;

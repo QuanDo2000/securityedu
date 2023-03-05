@@ -32,11 +32,9 @@ const Login = () => {
 
     try {
       const res = await fetch('http://localhost:8000/auth/login', {
-        mode: 'cors',
         method: 'POST',
         body: formData,
         credentials: 'include',
-        referrer: 'http://localhost:3000',
       });
       const resJson = await res.json();
       if (res.status === 200) {

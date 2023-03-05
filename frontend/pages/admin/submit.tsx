@@ -37,7 +37,6 @@ const Submit = () => {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-        referrer: 'http://localhost:3000',
         body: new URLSearchParams({
           title: e.currentTarget.postname.value,
           content: e.currentTarget.markdown.value,
