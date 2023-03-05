@@ -32,7 +32,7 @@ const Layout = ({
 
   const handleLogout = async (e: React.MouseEventHandler<HTMLLinkElement>) => {
     try {
-      const res = await fetch('http://127.0.0.1:8000/auth/logout', {
+      const res = await fetch('http://localhost:8000/auth/logout', {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',

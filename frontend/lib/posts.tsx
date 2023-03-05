@@ -21,7 +21,7 @@ type ApiData = {
 
 export const getSortedPostsData = async () => {
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/list');
+    const res = await fetch('http://localhost:8000/api/list');
     const data = await res.json();
 
     const allSortedData = data.map((entry: ApiData) => {
@@ -49,7 +49,7 @@ export const getSortedPostsData = async () => {
 export const getPostsData = async (type: string) => {
   const nType = Number(type);
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/list');
+    const res = await fetch('http://localhost:8000/api/list');
     const data = await res.json();
 
     const allSortedData = data.reduce((filtered: PostsData, entry: ApiData) => {
@@ -80,7 +80,7 @@ export const getPostsData = async (type: string) => {
 export const getPostData = async (id: string) => {
   const nid = Number(id);
   try {
-    const res = await fetch('http://127.0.0.1:8000/api/getArticle?id=' + nid);
+    const res = await fetch('http://localhost:8000/api/getArticle?id=' + nid);
     const data: ApiData = await res.json();
 
     if (data.content) {

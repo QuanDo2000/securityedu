@@ -31,7 +31,7 @@ const Login = () => {
     formData.append('password', e.currentTarget.password.value);
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/auth/login', {
+      const res = await fetch('http://localhost:8000/auth/login', {
         mode: 'cors',
         method: 'POST',
         body: formData,

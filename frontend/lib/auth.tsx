@@ -1,6 +1,6 @@
 export const authCheck = async () => {
   try {
-    const res = await fetch('http://127.0.0.1:8000/auth/user', {
+    const res = await fetch('http://localhost:8000/auth/user', {
       method: 'GET',
       credentials: 'include',
       mode: 'cors',
