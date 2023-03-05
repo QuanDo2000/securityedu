@@ -4,6 +4,7 @@ export const authCheck = async () => {
       method: 'GET',
       credentials: 'include',
       mode: 'cors',
+      referrer: 'http://localhost:3000',
     });
     if (res.status === 200) return true;
     return false;

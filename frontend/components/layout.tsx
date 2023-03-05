@@ -36,6 +36,7 @@ const Layout = ({
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
+        referrer: 'http://localhost:3000',
       });
       const resJson = res.json();
       if (res.status === 200) {

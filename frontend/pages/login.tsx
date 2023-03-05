@@ -36,6 +36,7 @@ const Login = () => {
         method: 'POST',
         body: formData,
         credentials: 'include',
+        referrer: 'http://localhost:3000',
       });
       const resJson = await res.json();
       if (res.status === 200) {
