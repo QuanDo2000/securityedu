@@ -5,7 +5,6 @@ import utilStyles from '../styles/utils.module.css';
 import { authCheck } from '../lib/auth';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Cookies from 'js-cookie';
 
 export const siteTitle = 'SecurityEdu';
 
@@ -35,10 +34,11 @@ const Layout = ({
     try {
       const res = await fetch('http://127.0.0.1:8000/auth/logout', {
         method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
       });
       const resJson = res.json();
       if (res.status === 200) {
-        Cookies.remove('jwt');
         router.push('/');
       } else {
         console.log(resJson);

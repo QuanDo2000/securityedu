@@ -4,7 +4,6 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import Layout from '../components/layout';
-import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import { authCheck } from '../lib/auth';
 
@@ -33,12 +32,13 @@ const Login = () => {
 
     try {
       const res = await fetch('http://127.0.0.1:8000/auth/login', {
+        mode: 'cors',
         method: 'POST',
         body: formData,
+        credentials: 'include',
       });
       const resJson = await res.json();
       if (res.status === 200) {
-        Cookies.set('jwt', resJson.jwt);
         setMessage('Login successful');
         router.push('/admin');
       } else {
