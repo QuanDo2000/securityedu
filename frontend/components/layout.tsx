@@ -73,15 +73,16 @@ const Layout = ({
       </header>
       <main>{children}</main>
       <div className={styles.footer}>
-        {!home && <Link href="/">← Back to home</Link>}
+        {!home && !admin && <Link href="/">← Back to home</Link>}
+        {!home && admin && <Link href="/">← Back to main site</Link>}
         {home && <div></div>}
-        {isAuth && !admin && <Link href="/admin">Admin</Link>}
+        {home && isAuth && !admin && <Link href="/admin">Admin</Link>}
         {isAuth && admin && (
           <Link legacyBehavior={false} href="#" onClick={handleLogout}>
             Logout
           </Link>
         )}
-        {!isAuth && <Link href="/login">Login</Link>}
+        {home && !isAuth && <Link href="/login">Login</Link>}
       </div>
     </div>
   );

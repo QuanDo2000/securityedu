@@ -48,32 +48,31 @@ python manage.py runserver
 
 The back-end server is hosted on localhost:8000.
 
-#### API Usage
-After running the back-end server, you can access the api by sending request to these urls: <br>
+### API Usage
 
-To list all articles, send GET request to: <br> 
-http://localhost:8000/api/list <br>
+After running the back-end server, you can access the api by sending request to these urls
 
-To get a specific article, send GET request to: <br>
-http://localhost:8000/api/getArticle?id=articleId <br>
+To list all articles, send GET request to: <http://localhost:8000/api/list>
 
-articleId being the id of the article you want to get <br>
+To get a specific article, send GET request to: <http://localhost:8000/api/getArticle?id=articleId>
 
-To get articles in a specific category, send GET request to: <br>
-http://localhost:8000/api/getArticlesByCategory?category=categoryId <br>
+- articleId being the id of the article you want to get
 
-categoryId being the id of the categories you want to get <br>
+To get articles in a specific category, send GET request to: <http://localhost:8000/api/getArticlesByCategory?category=categoryId>
 
-To submit an article to the website, send POST request to: <br> 
-http://localhost:8000/api/submit <br>
+- categoryId being the id of the categories you want to get
 
-You have to send data you want to submit along with the POST request in a JSON form <br>
-{ <br>
-  'title': 'This is my title', <br>
-  'category': 'dogs, cats',  //seperate category with a comma and whitespace <br>
-  'content': 'This is my content' <br>
- }<br>
- 
+To submit an article to the website, send POST request to: <http://localhost:8000/api/submit>
+
+- You have to send data you want to submit along with the POST request in a JSON form
+
+  ```json
+  {
+    "title": "This is my title",
+    "category": "dogs, cats", //seperate category with a comma and whitespace
+    "content": "This is my content"
+  }
+  ```
 
 ### Hosting
 

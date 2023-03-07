@@ -6,6 +6,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Alert from '@mui/material/Alert';
 import Layout from '../../components/layout';
 import AuthRoute from '../../components/AuthRoute';
+import Head from 'next/head';
 
 const Submit = () => {
   const [postName, setPostName] = React.useState('');
@@ -62,6 +63,9 @@ const Submit = () => {
   return (
     <AuthRoute>
       <Layout admin>
+        <Head>
+          <title>Admin Submit</title>
+        </Head>
         <Box
           sx={{
             display: 'flex',
