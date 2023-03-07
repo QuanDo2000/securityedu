@@ -33,13 +33,32 @@ The web server will check if the file name already exists in the server, and if 
 
 ##### a. Bypassing MIME Type validation
 Coming back to the example about MIME type validation metioned aboved. When we try to upload PHP file, the MIME becomes this.
-![image](https://user-images.githubusercontent.com/112114250/223304899-728f7dc6-0628-4f2a-94b1-d051ed010997.png)
-We can see that is has become multipart/form-data, which makes the web server return an error of not allowing this file type.
+
+![image](https://user-images.githubusercontent.com/112114250/223311613-4b5d2a43-f69f-40d0-8f21-64f017223847.png)
+We can see that is has become application/x-php, which makes the web server return an error of not allowing this file type.
+
 ![image](https://user-images.githubusercontent.com/112114250/223305208-fa0c1ea7-8738-4f44-9c0e-e7332f95dcf2.png)
-However, as we see before, hackers can control the MIME field by changing it in Burp Suite and resubmit the file again
+However, as we see before, hackers can control the MIME field by changing it in Burp Suite and resubmit the file again.
+
+![image](https://user-images.githubusercontent.com/112114250/223311859-e2360ccf-8618-4736-ba3f-995b6874cd4d.png)
+
+![image](https://user-images.githubusercontent.com/112114250/223312529-c899d53f-2160-484e-8905-2ad172c9cbcd.png)
+
+
+We can see that eventhough it is still a php file, changing the Content-Type header to a MIME type of jpeg help us to bypass the MIME filtering, which makes the malicious file get uploaded on the web server. The content of the file is to get carlos secret by accessing his secret file in his home directory. We can try to browse to the uploaded exploit file to see if it works.
+
+![image](https://user-images.githubusercontent.com/112114250/223312411-9e067b47-7368-47a3-b24f-956604f15df6.png)
+
+We have remote code execution on the web server, which could lead to more dangerous attack than this.
+
+### 5. Remediation
+- Using whitelist of permitted file extestion. If we host a webpage for users to change avatar, using a whitelist of allowing image files.
+- Go through all the validation before processing the files to be uploaded to the server
+- Implemeting framework to prevent file upload vulnerabilities
+- Generating random names for files to prevent uploaded files to overwrite existing ones.
 
 ### References
 - Wappalyzer tool: https://www.wappalyzer.com/
 - Magic byte signatures: https://en.wikipedia.org/wiki/List_of_file_signatures
 - Portswigger lab: https://portswigger.net/web-security/all-labs
-
+- Portswigger preventing File Upload Vulnerabilities: https://portswigger.net/web-security/file-upload
