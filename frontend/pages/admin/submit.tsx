@@ -33,7 +33,7 @@ const Submit = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/api/submit`, {
+      const res = await fetch(`http://20.185.25.136:8000/api/submit`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',

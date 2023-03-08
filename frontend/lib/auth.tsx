@@ -1,6 +1,6 @@
 export const authCheck = async () => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/auth/user`, {
+    const res = await fetch(`http://20.185.25.136:8000/auth/user`, {
       method: 'GET',
       credentials: 'include',
     });

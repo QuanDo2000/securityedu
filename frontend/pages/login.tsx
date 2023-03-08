@@ -31,7 +31,7 @@ const Login = () => {
     formData.append('password', e.currentTarget.password.value);
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/auth/login`, {
+      const res = await fetch(`http://20.185.25.136:8000/auth/login`, {
         method: 'POST',
         body: formData,
         credentials: 'include',
