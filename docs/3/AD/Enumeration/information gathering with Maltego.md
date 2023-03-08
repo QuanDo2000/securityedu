@@ -105,7 +105,7 @@ theHarvester -d tesla.com -l 1000 -b google
 - Don’t reuse password for every website you go.
 - Use two-factor authentication.
 - Change your password immediately if you know it is involved in a data breach.
-
+- Use password that does not have a pattern like pet names and birthday.
 
 
 
