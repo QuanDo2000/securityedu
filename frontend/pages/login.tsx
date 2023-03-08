@@ -31,11 +31,10 @@ const Login = () => {
     formData.append('password', e.currentTarget.password.value);
 
     try {
-      const res = await fetch('http://localhost:8000/auth/login', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/auth/login`, {
         method: 'POST',
         body: formData,
         credentials: 'include',
-        mode: 'cors',
       });
       const resJson = await res.json();
       if (res.status === 200) {

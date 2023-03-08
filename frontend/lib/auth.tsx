@@ -1,9 +1,8 @@
 export const authCheck = async () => {
   try {
-    const res = await fetch('http://localhost:8000/auth/user', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/auth/user`, {
       method: 'GET',
       credentials: 'include',
-      mode: 'cors',
     });
     if (res.status === 200) return true;
     return false;

@@ -33,9 +33,8 @@ const Submit = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:8000/api/submit', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/api/submit`, {
         method: 'POST',
-        mode: 'cors',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },

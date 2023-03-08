@@ -32,11 +32,13 @@ const Layout = ({
 
   const handleLogout = async (e: React.MouseEventHandler<HTMLLinkElement>) => {
     try {
-      const res = await fetch('http://localhost:8000/auth/logout', {
-        method: 'POST',
-        credentials: 'include',
-        mode: 'cors',
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND}/auth/logout`,
+        {
+          method: 'POST',
+          credentials: 'include',
+        }
+      );
       const resJson = res.json();
       if (res.status === 200) {
         router.push('/');
