@@ -7,6 +7,7 @@ import Alert from '@mui/material/Alert';
 import Layout from '../../components/layout';
 import AuthRoute from '../../components/AuthRoute';
 import Head from 'next/head';
+import { BACKEND_URL } from '../../lib/auth';
 
 const Submit = () => {
   const [postName, setPostName] = React.useState('');
@@ -33,7 +34,7 @@ const Submit = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch(`http://20.185.25.136:8000/api/submit`, {
+      const res = await fetch(`${BACKEND_URL}/api/submit`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',

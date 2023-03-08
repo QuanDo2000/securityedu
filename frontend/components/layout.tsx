@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import styles from './layout.module.css';
 import utilStyles from '../styles/utils.module.css';
-import { authCheck } from '../lib/auth';
+import { authCheck, BACKEND_URL } from '../lib/auth';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
@@ -32,7 +32,7 @@ const Layout = ({
 
   const handleLogout = async (e: React.MouseEventHandler<HTMLLinkElement>) => {
     try {
-      const res = await fetch(`http://20.185.25.136:8000/auth/logout`, {
+      const res = await fetch(`${BACKEND_URL}/auth/logout`, {
         method: 'POST',
         credentials: 'include',
       });

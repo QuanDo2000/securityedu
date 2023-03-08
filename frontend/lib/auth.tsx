@@ -1,6 +1,8 @@
+export const BACKEND_URL = 'http://20.185.25.136:8000';
+
 export const authCheck = async () => {
   try {
-    const res = await fetch(`http://20.185.25.136:8000/auth/user`, {
+    const res = await fetch(`${BACKEND_URL}/auth/user`, {
       method: 'GET',
       credentials: 'include',
     });

@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import Layout from '../components/layout';
 import { useRouter } from 'next/router';
-import { authCheck } from '../lib/auth';
+import { authCheck, BACKEND_URL } from '../lib/auth';
 
 const Login = () => {
   const router = useRouter();
@@ -31,7 +31,7 @@ const Login = () => {
     formData.append('password', e.currentTarget.password.value);
 
     try {
-      const res = await fetch(`http://20.185.25.136:8000/auth/login`, {
+      const res = await fetch(`${BACKEND_URL}/auth/login`, {
         method: 'POST',
         body: formData,
         credentials: 'include',
