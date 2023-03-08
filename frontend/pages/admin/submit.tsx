@@ -35,6 +35,7 @@ const Submit = () => {
     try {
       const res = await fetch('http://localhost:8000/api/submit', {
         method: 'POST',
+        mode: 'cors',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },

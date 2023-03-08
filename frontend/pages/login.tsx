@@ -35,6 +35,7 @@ const Login = () => {
         method: 'POST',
         body: formData,
         credentials: 'include',
+        mode: 'cors',
       });
       const resJson = await res.json();
       if (res.status === 200) {

@@ -35,6 +35,7 @@ const Layout = ({
       const res = await fetch('http://localhost:8000/auth/logout', {
         method: 'POST',
         credentials: 'include',
+        mode: 'cors',
       });
       const resJson = res.json();
       if (res.status === 200) {
