@@ -75,7 +75,7 @@ const Layout = ({
       <div className={styles.footer}>
         {!home && !admin && <Link href="/">← Back to home</Link>}
         {!home && admin && <Link href="/">← Back to main site</Link>}
-        {home && <div></div>}
+        {home && <Link href="/faq">FAQ</Link>}
         {home && isAuth && !admin && <Link href="/admin">Admin</Link>}
         {isAuth && admin && (
           <Link legacyBehavior={false} href="#" onClick={handleLogout}>
