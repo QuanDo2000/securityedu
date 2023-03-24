@@ -24,8 +24,9 @@ Use an encrypted Wi-Fi or Bluetooth connection. This will make it harder for an 
 Install security software. This software can monitor your Bluetooth connection and block unwanted connections.
 ### 3.5 Update the equipment in time.
 Update your device and applications. It's also the best general way to keep your mobile device safe. New versions fix security holes and bugs.
-
+##
 Francozappa. (n.d.). Francozappa/Knob: Key Negotiation of Bluetooth (KNOB) attacks on Bluetooth BR/EDR and ble [CVE-2019-9506]. GitHub. Retrieved February 18, 2023, from https://github.com/francozappa/knob 
+###
 CVE-2019-9506. CVE. (n.d.). Retrieved February 18, 2023, from https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9506 
 
 
