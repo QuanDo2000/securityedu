@@ -1,13 +1,10 @@
-This article will show how hackers gather information for an attack and how to mitigate against it.
-
 ### 1.	What is a reconnaissance attack?
--	Reconnaissance is a type of computer attack in which an intruder engages with the targeted system to gather information about vulnerabilities. The attacker first discovers any vulnerable ports by using software's like port scanning.
--	In this document, we will cover some tools that can be used for reconnaissance 
+-	Reconnaissance is a type of is a type of attack where attackers want to gather more information about the system to understand attack surface that they can exploit.
 
 ### 2.	Types of reconnaissance
 -	There are two types of reconnaissance: passive and active reconnaissance. 
--	Active reconnaissance involves being present on a target network or server, leaving a trail in the hacker's wake.
--	Passive reconnaissance is concerned with being as untraceable as possible.
+-	Active reconnaissance includes interacting directly with the target, such as scanning.
+-	Passive reconnaissance means using different sources to gather information instead of interacting with the system itself.
 
 ### 3.	Passive reconnaissance
 #### a.	Whois
@@ -112,6 +109,8 @@ nmap -p445 --script smb-vuln-ms17-010 <target IP>
 - Conducting a penetration test periodically could help our system more secure because we could find vulnerabilities in our system before hackers can exploit it.
 - Do not use working emails for social or commercial sites because our emails could be exposed for hackers to easily gather information.
 
+### 6. References
+- theHarvester github: https://github.com/laramies/theHarvester
 
 
 
