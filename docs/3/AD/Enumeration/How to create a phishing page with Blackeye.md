@@ -1,13 +1,17 @@
-1.	Introduction
+### 1.	Introduction
 Social media accounts is a big attack target for hackers. Most social media attacks are based on phishing. Phishing is a type of attack that trick users to enter their credentials on a fake webpage that hackers create. Blackeye is a tool that help hackers create a phishing webpage easily, and it can be used for social engineering related penetration testing jobs. 
-2.	How to install Blackeye
+
+
+### 2.	How to install Blackeye
 -	First, we need to clone the blackeye’s github repository. To do this, type in:
 cd /opt
 git clone https://github.com/thelinuxchoice/blackeye.git
 -	After that, we go to blackeye directory and run the script. Type in
 cd /opt/blackeye
 bash blackeye.sh
-3.	Start the phishing page
+
+
+### 3.	Start the phishing page
 -	First, we choose the webpage that we want to fake. In this example, we choose eBay. Type in option 18 and press enter.
 
 ![image](https://user-images.githubusercontent.com/112114250/227403903-f7cbde01-8276-48fc-9357-a89c8bb9d1e8.png)
@@ -40,4 +44,12 @@ cat /opt/blackeye/sites/shopping/saved.usernames.txt
 
 -	With this information, hackers can do more gathering about the target and get further on the network.
 
+### 4. How to prevent phishing attacks
+- Don't click random links unless we know it is from a trusted source.
+- Try to inspect the link before browsing to it.
+- Enable two-factor authentication to add an extra step for the authentication phase.
+
+### 5. References
+
+- How to install BlackEye: https://www.geeksforgeeks.org/blackeye-phishing-tool-in-kali-linux/
 
