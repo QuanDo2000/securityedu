@@ -15,6 +15,7 @@ const Submit = () => {
   const [tags, setTags] = React.useState<string[]>([]);
   const [hasError, setHasError] = React.useState(false);
   const [message, setMessage] = React.useState('');
+  const [file, setFile] = React.useState<File | null>(null);
 
   React.useEffect(() => {
     const error = tags.filter((value) => {
@@ -29,6 +30,24 @@ const Submit = () => {
       setHasError(false);
     }
   }, [tags]);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setFile(event.target.files[0]);
+    }
+  };
+
+  React.useEffect(() => {
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const fileContent = event.target?.result;
+        console.log(fileContent);
+        setMdContent(fileContent as string);
+      };
+      reader.readAsText(file);
+    }
+  }, [file]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -111,6 +130,20 @@ const Submit = () => {
               }}
               sx={{ mb: '1rem' }}
             />
+            <Button
+              variant="contained"
+              component="label"
+              sx={{ mb: '1rem' }}
+              fullWidth
+            >
+              Upload Markdown
+              <input
+                hidden
+                accept=".md"
+                type="file"
+                onChange={handleFileChange}
+              />
+            </Button>
             {hasError && (
               <Alert severity="error" sx={{ mb: '1rem' }}>
                 Category name has invalid characters.
