@@ -5,7 +5,7 @@ Social media accounts is a big attack target for hackers. Most social media atta
 ### 2.	How to install Blackeye
 -	First, we need to clone the blackeye’s github repository. To do this, type in:
 cd /opt
-git clone https://github.com/thelinuxchoice/blackeye.git
+git clone https://github.com/thelinuxchoice/blackeye
 -	After that, we go to blackeye directory and run the script. Type in
 cd /opt/blackeye
 bash blackeye.sh
