@@ -10,7 +10,7 @@
 
 This vulnerability allows some criminals to execute arbitrary codes in the NFC process, in this way, they can invade your mobile phone and obtain information. Although the NFC vulnerability is fixed, who knows how many 0-day vulnerabilities there are. So, you can't just enjoy the convenience brought by NFC, but ignore the risks it increases.
 
-## 3 NFC measures
+## 3. NFC measures
 
 - 3.1 Only turn on the NFC function when you need to use it and try to set it to off when not in use. The operation steps can be found directly in Settings, then NFC.
 
@@ -18,7 +18,7 @@ This vulnerability allows some criminals to execute arbitrary codes in the NFC p
 
 
 
-
+##
 N. A. Chattha, "NFC — Vulnerabilities and defense," 2014 Conference on Information Assurance and Cyber Security (CIACS), Rawalpindi, Pakistan, 2014, pp. 35-38, doi: 10.1109/CIACS.2014.6861328.
 Android Security Bulletin-October 2021  :   Android Open Source Project (no date) Android Open Source Project. Available at: https://source.android.com/docs/security/bulletin/2021-10-01 (Accessed: February 14, 2023). 
 
