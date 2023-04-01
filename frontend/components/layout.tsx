@@ -5,6 +5,7 @@ import utilStyles from '../styles/utils.module.css';
 import { authCheck, BACKEND_URL } from '../lib/auth';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Box from '@mui/material/Box';
 
 export const siteTitle = 'SecurityEdu';
 
@@ -75,7 +76,16 @@ const Layout = ({
       <div className={styles.footer}>
         {!home && !admin && <Link href="/">← Back to home</Link>}
         {!home && admin && <Link href="/">← Back to main site</Link>}
-        {home && <Link href="/faq">FAQ</Link>}
+        {!admin && (
+          <Box sx={{ display: 'flex' }}>
+            <Box>
+              <Link href="/faq">FAQ</Link>
+            </Box>
+            <Box sx={{ ml: '1rem' }}>
+              <Link href="/search">Search</Link>
+            </Box>
+          </Box>
+        )}
         {home && isAuth && !admin && <Link href="/admin">Admin</Link>}
         {isAuth && admin && (
           <Link legacyBehavior={false} href="#" onClick={handleLogout}>

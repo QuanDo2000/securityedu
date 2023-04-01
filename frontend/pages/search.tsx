@@ -26,6 +26,10 @@ const Search = ({ sortedPostsData }: { sortedPostsData: PostsData }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (searchTerm === '') {
+      setSearchResult([]);
+      return;
+    }
     try {
       const results = sortedPostsData.filter((post) => {
         return (
