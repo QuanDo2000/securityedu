@@ -30,6 +30,7 @@ export const getSortedPostsData = async () => {
         id: entry.id,
         date: entry.created_at,
         title: entry.title,
+        content: entry.content,
       };
     });
     return allSortedData.sort((a: PostData, b: PostData) => {
