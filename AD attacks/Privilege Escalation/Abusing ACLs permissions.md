@@ -1,24 +1,5 @@
-### Active Directory ADCL/ACE
-Active Directory objects such as users and groups are securable objects and DACL/ACEs define who can read/modify those objects (i.e change account name, reset password, etc). 
-An example of ACEs for the "Domain Admins" securable object
-![alt text](https://techcommunity.microsoft.com/t5/image/serverpage/image-id/49175i9B083F7E84DF9978)
-Some of the Active Directory object permissions and types that we as attackers are interested in:
-- **GenericAll** - full rights to the object (add users to a group or reset user's password)
-- **GenericWrite** - update object's attributes (i.e logon script)
-- **WriteOwner** - change object owner to attacker controlled user take over the object
-- **WriteDACL** - modify object's ACEs and give attacker full control right over the object
-- **AllExtendedRights** - ability to add user to a group or reset password
-- **ForceChangePassword** - ability to change user's password
-- **Self (Self-Membership)** - ability to add yourself to a group
+### Permission delegation 
+In Active Directory, users can delegate permission to others to perform action. Imagine an organization with 100000 employees asking to reset their passwords, and this would be a headache to the system admin. Instead, he could assign the task to the Helpdesk team to do it, which could reduce a lot of work. However, in order to control security with permission delegation is also a big challenge for the IT team, and misconfigured delagation could lead to a lot of attacks, as we will discuss here.
 
-### Enumerate Object ACLs
-
-#### GenericAll on User
-We can use Powerview script to enumerate users right in Active Directory. This command look for GenericAll rights on the AD object for the user nguye5tn:
-```powershell
-Get-ObjectAcl -SamAccountName nguye5tn -ResolveGUIDs | ? {$_.ActiveDirectoryRights -eq "GenericAll"}  
-```
-
-### References
-Abusing AD ACLs/ACEs: https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/abusing-active-directory-acls-aces
-
+### Access Control Entries
+Attacks using an ACL are also referred to as permission delegation exploits. The term "ACL-based attacks" refers to the ability of AD administrators to configure Access Control Entries (ACEs), which are used to fill Discretionary Access Control Lists (DACLs). With ACEs, almost any AD item may be secured. These ACEs then specify the permissions that every other AD object has against the target object, both allowed and forbidden. If these ACEs are configured incorrectly, an attacker might be able to take advantage of them. Imagine the HelpDesk team has ForceChangePassword delegation that they could use to reset password of the Domain Users group, this could be insurecure because if the attackers can compromise one of the users in the Helpdesk group, he could use it to change the Domain Admins accounts and take over the domain.
