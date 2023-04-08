@@ -45,3 +45,10 @@ def submit(request):
          article.category.add(old_category.id)
          article.save()
    return Response('Update success', status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def delete(request):
+   id = request.POST.get('id')
+   instance = Article.objects.get(id=id)
+   instance.delete()
+   return Response('Deleted', status=status.HTTP_200_OK)
