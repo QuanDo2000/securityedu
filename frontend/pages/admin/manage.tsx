@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import { getSortedPostsData, PostsData } from '../../lib/posts';
 import { useEffect, useState } from 'react';
 import { Skeleton } from '@mui/material';
+import { BACKEND_URL } from '../../lib/auth';
 
 const Manage = () => {
   const [sortedPostsData, setPostsData] = useState([]);
@@ -26,8 +27,27 @@ const Manage = () => {
     }
   }, [isLoading]);
 
-  const handleDelete = (id: number) => {
+  const handleDelete = async (id: number) => {
     console.log(`Delete post with ID ${id}`);
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/delete`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          id: id.toString(),
+        }),
+      });
+      const resJson = await res.json();
+      if (res.status === 200) {
+        console.log(resJson);
+      } else {
+        console.log(resJson);
+      }
+    } catch (err) {
+      console.log(err);
+    }
     setLoading(true);
   };
 
