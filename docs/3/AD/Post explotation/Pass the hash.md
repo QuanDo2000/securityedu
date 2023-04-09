@@ -1,9 +1,17 @@
 ### What is NTLM?
-Windows New Technology LAN Manager (NTLM) is a suite of security protocols offered by Microsoft to authenticate users’ identity and protect the integrity and confidentiality of their activity. At its core, NTLM is a single sign on (SSO) tool that relies on a challenge-response protocol to confirm the user without requiring them to submit a password.
+NTLM is an authentication protocol of Microsoft used in Active Directory environment. It used the challenge and response method to authenticate users to ensure the integrity of the act performed by the users.
+
+### NTLM authentication process
+- Client send the authentication request with username to the server 
+- Server generates a random generated numbers as a challenge
+- The client encrypt the password with the challenge and send to the server to verify the credentials
+- The server send the challenge and user response to the Domain Controller. Because the Domain Controller has the database contains all the users hash, it verifies the authentication by calculating the value with the username and challenge and double check with the users response. If they match, users get authenticated, and if they do not match, access denied and the result will be sent to the server
+- The server sends the result to the client
+
 
 ### Pass the hash
 #### What is pass the hash attack
-The Pass the Hash (PtH) technique allows an attacker to authenticate to a remote system or service using a user’s NTLM hash instead of the associated plaintext password.
+Because of the NTLM authentication process, users can just know the hash and already get authenticated. Therefore, knowing the plaintext in not needed, and hackers can passing the hash around to authenticate as another users.
 
 #### How pass the hash works with examples
 -	After exploiting a machine, we get these hashes, but we cannot crack it because it is so complex. We can try [crackmapexec](https://github.com/Porchetta-Industries/CrackMapExec) and pass these hashes around to see if we can login another computer with the same hash.
@@ -17,14 +25,13 @@ crackmapexec smb 10.0.2.0/24 -u Administrator -H aad3b435b51404eeaad3b435b51404e
 - With this information, we can get a meterpreter by using a module called psexec.
 
 ### PsExec with examples
--	PsExec is a command-line tool that lets you execute processes on remote systems and redirect console applications' output to the local system so that these applications appear to be running locally.
+-	PsExec is a tool to help users execute process on remote system. Using this can help hackers create remote shell on the target machine.
 -	Using the same hash that we pass before, PsExec can be used to log in and create a shell on the remote machine.
 ![image](https://user-images.githubusercontent.com/112114250/202682339-ab8d2e8f-6be4-4671-8089-fd23ebe9a3af.png)
 
 ### Pth Mitigations
-- Disable Lan Management (LM) hashes
-- Create complex password policy for Domain Admin accounts
-- Create non-privilged account, so that system admins can perform normal daily tasks instead of using privileged account
+- Disable using NTLM hashes in the environment
+- Domain Admins Account should have complex password
 
 ### References
 NTLM theory: https://www.crowdstrike.com/cybersecurity-101/ntlm-windows-new-technology-lan-manager/
