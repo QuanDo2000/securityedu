@@ -33,6 +33,9 @@ for folder in os.listdir(docs):
     fol = os.path.join(docs, folder)
     for (dir_path, dir_names, file_names) in os.walk(fol):
         for file in file_names:
+            extension = os.path.splitext(file)[1]
+            if extension != '.md':
+                continue
             content = os.path.join(dir_path, file)
             content = io.open(content, mode='r', encoding='latin-1')
             content = content.read()

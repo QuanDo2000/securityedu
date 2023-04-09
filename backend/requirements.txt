@@ -3,3 +3,4 @@ djangorestframework
 PyJWT==1.7.1
 django-cors-headers
 GitPython
+django-cors-headers
