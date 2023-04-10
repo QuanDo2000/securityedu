@@ -202,7 +202,7 @@ const Layout = ({ children , home , admin  })=>{
 /* harmony export */   "X": () => (/* binding */ authCheck),
 /* harmony export */   "z": () => (/* binding */ BACKEND_URL)
 /* harmony export */ });
-const BACKEND_URL = "http://securityedu.eastus.cloudapp.azure.com/:8000";
+const BACKEND_URL = "http://securityedu.eastus.cloudapp.azure.com:8000";
 // export const BACKEND_URL = 'http://localhost:8000';
 const authCheck = async ()=>{
     try {

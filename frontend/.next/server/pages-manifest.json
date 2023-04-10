@@ -7,10 +7,10 @@
   "/cvedetail": "pages/cvedetail.html",
   "/faq": "pages/faq.html",
   "/login": "pages/login.html",
-  "/_document": "pages/_document.js",
   "/category/[type]": "pages/category/[type].js",
   "/": "pages/index.js",
   "/msupdate": "pages/msupdate.js",
+  "/_document": "pages/_document.js",
   "/posts/[id]": "pages/posts/[id].js",
   "/search": "pages/search.js",
   "/404": "pages/404.html"
