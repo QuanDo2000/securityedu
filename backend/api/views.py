@@ -48,7 +48,11 @@ def submit(request):
 
 @api_view(['POST'])
 def delete(request):
-   id = request.POST.get('id')
+   id = request.data['id']
    instance = Article.objects.get(id=id)
-   instance.delete()
-   return Response('Deleted', status=status.HTTP_200_OK)
+   try:
+      instance = Article.objects.get(pk=id)
+      instance.delete()
+      return Response('Deleted', status=status.HTTP_200_OK)
+   except:
+      return Response('The id does not exist', status=status.HTTP_404_NOT_FOUND)
