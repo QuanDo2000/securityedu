@@ -1,4 +1,4 @@
-export const BACKEND_URL = 'http://20.185.25.136:8000';
+export const BACKEND_URL = 'http://securityedu.eastus.cloudapp.azure.com/:8000';
 // export const BACKEND_URL = 'http://localhost:8000';
 
 export const authCheck = async () => {
