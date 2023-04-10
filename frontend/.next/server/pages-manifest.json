@@ -1,0 +1,17 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/admin": "pages/admin.html",
+  "/admin/manage": "pages/admin/manage.html",
+  "/admin/submit": "pages/admin/submit.html",
+  "/cvedetail": "pages/cvedetail.html",
+  "/faq": "pages/faq.html",
+  "/login": "pages/login.html",
+  "/_document": "pages/_document.js",
+  "/category/[type]": "pages/category/[type].js",
+  "/": "pages/index.js",
+  "/msupdate": "pages/msupdate.js",
+  "/posts/[id]": "pages/posts/[id].js",
+  "/search": "pages/search.js",
+  "/404": "pages/404.html"
+}
