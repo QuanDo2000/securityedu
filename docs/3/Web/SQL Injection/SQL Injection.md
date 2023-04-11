@@ -1,8 +1,8 @@
 ### 1. What is a database?
-According to Oracle, a database is an organized collection of structured information, or data, typically stored electronically in a computer system. A database is usually controlled by a database management system (DBMS). Together, the data and the DBMS, along with the applications that are associated with them, are referred to as a database system, often shortened to just database.
+Database is a collection of structured data that can be used to store information and return it to different application such as web application with a login form that used database to store user credentials, or a shopping website that store product information to display on the page.
 
 ### 2. What is Structured Query Language (SQL)?
-Structured Query Language is a programming language used in relational database to query and manage data. Some basic syntax in SQL are:
+SQL is a programming language used in relational database to query and manage data.
 
 ### SQL Injection
 
