@@ -1,7 +1,6 @@
 ### 1. What is IDOR vulnerability?
-IDOR stands for Insecure Direct Object Reference and is a type of access control vulnerability.
 
-This kind of vulnerability can happen when a web server gets user input to get objects (files, data, documents) and too much trust is put in the input data without checking on the server-side to ensure the requested object belongs to the user requesting it.
+This kind of vulnerability can happen when a web server receive user input without checking if it comes from the real user.
 
 ### 2. IDOR example
 Imagine that you wish to update your profile information after recently signing up for a service online. You can view your information at http://online-service.test/profile?userid=123 by clicking the link.
@@ -10,10 +9,10 @@ Attackers can try to change the user id value to 100 (http://online-service.test
 
 ### 3. Type of IDOR vulnerabilities
 ##### a. Encoded IDs
-Web developers frequently take the raw data and encrypt it before transmitting it from page to page via post data, query strings, or cookies. Encoding guarantees that the information will be understandable by the receiving web server. Encoding converts binary data into an ASCII string, typically using the padding characters a-z, A-Z, 0-9, and =. Base64 encoding is the most widely used encoding method on the web. However, attackers can decode this encoded string, change it into other user IDs, and encode it again using the base64. This way attackers can inject other users IDs to find IDOR vulnerabilities.
+These IDs come after the URL path will be encoded in many different ways, typically Base64. Attackers can easily decode it, put in another payload, and encode it again to send it to the server and access other users' resources.
 
 ##### b. Hashed IDs
-Same as encoded IDs, but hash value cannot be reverted. We can try to guess the pattern using the hash table, and then put the hash to change the user IDs.
+This technique is the same as Encoded IDs, but hashing making it more difficult because attackers need to use hash table to compare the hash of the IDs and then hash it again to put into the payload.
 
 ### 4. Practical examples(OWASP Juice Shop)
 In OWASP Juice Shop, login to the Admin account and click 'Your Basket' and intercept the request with Burp Suite.
@@ -28,7 +27,7 @@ Repeat the process and capture the request again, change ID to 2 to see what hap
 
 
 ### 5. Remediation
-- Access validation: Make sure the input IDs belong to the users requesting it. If the users does not have a valid credentials for the requested content, the server can drop the request and return an error.
+- Access validation: validate the IDs actually belong to the user requesting it. This can be check through many defense mechanism such as cookie.
 
 ### References
 
